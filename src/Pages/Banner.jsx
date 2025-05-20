@@ -2,19 +2,25 @@ import Slider from "react-slick";
 import { Link } from "react-router";
 
 const Banner = () => {
-const settings = {
-  dots: true,
-  infinite: true,
-  autoplay: true,
-  speed: 800,             
-  autoplaySpeed: 4000,    
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  arrows: false,
-  pauseOnHover: false,
-  cssEase: "ease-in-out",
-};
+  const settings = {
+    dots: true,
+    infinite: true,
+    autoplay: true,
+    speed: 800,             
+    autoplaySpeed: 4000,    
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    pauseOnHover: false,
+    cssEase: "ease-in-out",
 
+    // এখানে যোগ করলাম:
+    beforeChange: () => {
+      if (document.activeElement) {
+        document.activeElement.blur();
+      }
+    },
+  };
 
   const slides = [
     {

@@ -1,16 +1,9 @@
+// src/App.jsx
+const App = () => {
+  const API_URL = import.meta.env.VITE_API_URL;
+  console.log("API is running at:", API_URL); // শুধু check করার জন্য
 
-import './App.css'
+  return <div>Hello Gardening App</div>;
+};
 
-function App() {
-
-
-  return (
-    <>
-     
-      <h1>banana crud</h1>
-      
-    </>
-  )
-}
-
-export default App
+export default App;
