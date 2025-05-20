@@ -1,4 +1,3 @@
-import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
@@ -8,29 +7,32 @@ import ExploreGardeners from '../pages/ExploreGardeners';
 import BrowseTips from '../pages/BrowseTips';
 import MyTips from '../pages/MyTips';
 import UpdateTip from '../pages/UpdateTip';
-import LayOut from '../Pages/LayOut';
-import TipsDetails from '../Pages/TipsDetails';
+import LayOut from '../pages/LayOut';
+import TipsDetails from '../pages/TipsDetails';
+import ErrorPage from '../pages/ErrorPage';
+import PrivateRoute from './provider/PrivateRoute';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    Component:  LayOut,
+    element: <LayOut />, 
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
-        Component: Home,
+        element: <Home />,
       },
       {
         path: 'login',
-        Component: Login,
+        element: <Login />,
       },
       {
         path: 'register',
-        Component: Register,
+        element: <Register />,
       },
       {
         path: 'share-tip',
-        Component: () => (
+        element: (
           <PrivateRoute>
             <ShareTip />
           </PrivateRoute>
@@ -38,15 +40,15 @@ export const router = createBrowserRouter([
       },
       {
         path: 'explore-gardeners',
-        Component: ExploreGardeners,
+        element: <ExploreGardeners />,
       },
       {
         path: 'browse-tips',
-        Component: BrowseTips,
+        element: <BrowseTips />,
       },
       {
         path: 'my-tips',
-        Component: () => (
+        element: (
           <PrivateRoute>
             <MyTips />
           </PrivateRoute>
@@ -54,11 +56,15 @@ export const router = createBrowserRouter([
       },
       {
         path: 'tip/:id',
-        Component:TipsDetails,
+        element: (
+          <PrivateRoute>
+            <TipsDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: 'update-tip/:id',
-        Component: () => (
+        element: (
           <PrivateRoute>
             <UpdateTip />
           </PrivateRoute>
