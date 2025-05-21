@@ -77,7 +77,7 @@ const Navbar = () => {
 
         {user && (
           <NavLink
-            to="/share-tip"
+            to="/sharedtip"
             className={({ isActive }) =>
               isActive
                 ? "text-green-700 underline"
@@ -90,7 +90,7 @@ const Navbar = () => {
         )}
 
         <NavLink
-          to="/explore"
+          to="/explore-gardeners"
           className={({ isActive }) =>
             isActive
               ? "text-green-700 underline"

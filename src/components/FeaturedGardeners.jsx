@@ -7,7 +7,7 @@ const FeaturedGardeners = () => {
     fetch('http://localhost:3000/gardeners/active')  // backend API URL
       .then(res => res.json())
       .then(data => setGardeners(data))
-      .catch(err => console.error('Error fetching gardeners:', err));
+      .catch(error => console.error('Error fetching gardeners:', error));
   }, []);
 
   return (
