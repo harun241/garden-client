@@ -31,7 +31,7 @@ const Footer = () => {
       </div>
 
       <div style={styles.copyRight}>
-        &copy; {new Date().getFullYear()} YourProjectName. All rights reserved.
+        &copy; {new Date().getFullYear()} Gardening All rights reserved.
       </div>
     </footer>
   );

@@ -14,7 +14,7 @@ const Banner = () => {
     pauseOnHover: false,
     cssEase: "ease-in-out",
 
-    // এখানে যোগ করলাম:
+
     beforeChange: () => {
       if (document.activeElement) {
         document.activeElement.blur();
