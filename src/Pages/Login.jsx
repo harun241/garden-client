@@ -51,8 +51,9 @@ const Login = ({ setUser, user }) => {
     }
   };
 
+  // 🔒 If user already logged in, return null or loading spinner
   if (user) {
-    return null;
+    return null; // or <div>Redirecting...</div> if you want a message
   }
 
   return (

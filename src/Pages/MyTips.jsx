@@ -10,7 +10,7 @@ const MyTips = ({ user }) => {
   // Fetch only the logged-in user's tips
   useEffect(() => {
     if (!user) return; // wait for user info
-    
+
     setLoading(true);
     fetch(`http://localhost:3000/api/garden-tips?userId=${user.id}`)
       .then((res) => {
@@ -28,21 +28,21 @@ const MyTips = ({ user }) => {
   }, [user]);
 
   // Delete tip handler
-  const handleDelete = (tipId) => {
+  const handleDelete = async (tipId) => {
     const confirmed = window.confirm('Are you sure you want to delete this tip?');
     if (!confirmed) return;
 
-    fetch(`http://localhost:3000/api/garden-tips/${tipId}`, {
-      method: 'DELETE',
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error('Failed to delete tip');
-        // Remove deleted tip from state
-        setTips((prevTips) => prevTips.filter((tip) => tip.id !== tipId && tip._id !== tipId));
-      })
-      .catch((err) => {
-        alert(`Error: ${err.message}`);
+    try {
+      const res = await fetch(`http://localhost:3000/api/garden-tips/${tipId}`, {
+        method: 'DELETE',
       });
+      if (!res.ok) throw new Error('Failed to delete tip');
+
+      setTips((prevTips) => prevTips.filter((tip) => tip.id !== tipId && tip._id !== tipId));
+      alert('Tip deleted successfully!');
+    } catch (err) {
+      alert(`Error: ${err.message}`);
+    }
   };
 
   // Navigate to update tip page
