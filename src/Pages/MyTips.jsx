@@ -6,25 +6,25 @@ const MyTips = ({ user }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+useEffect(() => {
+  if (!user) return;
 
-  useEffect(() => {
-    if (!user) return;
-
-    setLoading(true);
-    fetch(`http://localhost:3000/api/garden-tips?userId=${user.id}`)
-      .then((res) => {
-        if (!res.ok) throw new Error('Failed to fetch your tips');
-        return res.json();
-      })
-      .then((data) => {
-        setTips(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, [user]);
+  setLoading(true);
+  fetch(`http://localhost:3000/api/garden-tips?email=${user.email}`)
+    .then((res) => {
+      if (!res.ok) throw new Error('Failed to fetch your tips');
+      return res.json();
+    })
+    .then((data) => {
+      console.log(data);
+      setTips(data);
+      setLoading(false);
+    })
+    .catch((err) => {
+      setError(err.message);
+      setLoading(false);
+    });
+}, [user]);
 
   const handleDelete = async (tipId) => {
     const confirmed = window.confirm('Are you sure you want to delete this tip?');
