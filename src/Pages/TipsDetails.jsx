@@ -25,7 +25,7 @@ const TipDetails = () => {
   }, [id]);
 
   const handleLike = async () => {
-    if (likeLoading) return; // prevent multiple clicks
+    if (likeLoading) return; 
     setLikeLoading(true);
 
     try {
@@ -34,7 +34,7 @@ const TipDetails = () => {
       });
       if (!response.ok) throw new Error('Failed to update like');
 
-      // Update local state to reflect new like count
+     
       setTip(prev => ({
         ...prev,
         totalLiked: (prev.totalLiked || 0) + 1,

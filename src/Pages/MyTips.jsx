@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 const MyTips = ({ user }) => {
   const [tips, setTips] = useState([]);
@@ -7,9 +7,8 @@ const MyTips = ({ user }) => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  // Fetch only the logged-in user's tips
   useEffect(() => {
-    if (!user) return; // wait for user info
+    if (!user) return;
 
     setLoading(true);
     fetch(`http://localhost:3000/api/garden-tips?userId=${user.id}`)
@@ -27,7 +26,6 @@ const MyTips = ({ user }) => {
       });
   }, [user]);
 
-  // Delete tip handler
   const handleDelete = async (tipId) => {
     const confirmed = window.confirm('Are you sure you want to delete this tip?');
     if (!confirmed) return;
@@ -38,14 +36,14 @@ const MyTips = ({ user }) => {
       });
       if (!res.ok) throw new Error('Failed to delete tip');
 
-      setTips((prevTips) => prevTips.filter((tip) => tip.id !== tipId && tip._id !== tipId));
+
+      setTips((prevTips) => prevTips.filter((tip) => tip._id !== tipId));
       alert('Tip deleted successfully!');
     } catch (err) {
       alert(`Error: ${err.message}`);
     }
   };
 
-  // Navigate to update tip page
   const handleUpdate = (tipId) => {
     navigate(`/update-tip/${tipId}`);
   };
@@ -78,21 +76,26 @@ const MyTips = ({ user }) => {
           </thead>
           <tbody>
             {tips.map((tip) => (
-              <tr key={tip.id || tip._id} style={{ borderBottom: '1px solid #ddd' }}>
+              <tr key={tip._id} style={{ borderBottom: '1px solid #ddd' }}>
                 <td style={{ padding: '0.5rem' }}>{tip.title}</td>
                 <td>{tip.plantType}</td>
                 <td>{tip.difficultyLevel}</td>
                 <td>{tip.isPublic ? 'Public' : 'Private'}</td>
                 <td>
                   <button
-                    onClick={() => handleUpdate(tip.id || tip._id)}
+                    onClick={() => handleUpdate(tip._id)}
                     style={{ marginRight: 8, padding: '0.3rem 0.6rem' }}
                   >
                     Update
                   </button>
                   <button
-                    onClick={() => handleDelete(tip.id || tip._id)}
-                    style={{ padding: '0.3rem 0.6rem', backgroundColor: '#d9534f', color: 'white', border: 'none' }}
+                    onClick={() => handleDelete(tip._id)}
+                    style={{
+                      padding: '0.3rem 0.6rem',
+                      backgroundColor: '#d9534f',
+                      color: 'white',
+                      border: 'none',
+                    }}
                   >
                     Delete
                   </button>
