@@ -1,13 +1,17 @@
-import { useState } from "react";
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { toast } from "react-toastify";
 
+import { useState } from "react";
+import {
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
+import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../firebase.config";
 
 const provider = new GoogleAuthProvider();
 
-const Login = () => {
+const Login = ({ setUser }) => {
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
@@ -16,7 +20,12 @@ const Login = () => {
     const { email, password } = form;
 
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
+      .then((userCredential) => {
+        const loggedInUser = userCredential.user;
+        setUser({
+          email: loggedInUser.email,
+          name: loggedInUser.displayName || loggedInUser.email.split("@")[0],
+        });
         toast.success("Login successful!");
         navigate("/");
       })
@@ -27,7 +36,12 @@ const Login = () => {
 
   const handleGoogleLogin = () => {
     signInWithPopup(auth, provider)
-      .then(() => {
+      .then((result) => {
+        const loggedInUser = result.user;
+        setUser({
+          email: loggedInUser.email,
+          name: loggedInUser.displayName || loggedInUser.email.split("@")[0],
+        });
         toast.success("Google login successful!");
         navigate("/");
       })
@@ -74,7 +88,9 @@ const Login = () => {
 
         <div className="flex justify-center items-center mt-2">
           <small>Don’t Have Account?</small>
-          <Link to="/register" className="text-violet-600 ml-1">Register</Link>
+          <Link to="/register" className="text-violet-600 ml-1">
+            Register
+          </Link>
         </div>
       </div>
     </div>

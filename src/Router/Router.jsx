@@ -5,7 +5,7 @@ import Register from '../pages/Register';
 
 import ExploreGardeners from '../pages/ExploreGardeners';
 import BrowseTips from '../pages/BrowseTips';
-import MyTips from '../pages/MyTips';
+
 import UpdateTip from '../pages/UpdateTip';
 import TipsDetails from '../pages/TipsDetails';
 import ErrorPage from '../pages/ErrorPage';
@@ -13,6 +13,7 @@ import PrivateRoute from './provider/PrivateRoute';
 import LayOut from '../Pages/LayOut';
 import Login from '../Pages/Login';
 import ShareGardenTip from '../Pages/ShareGardenTip';
+import MyTips from '../pages/MyTips';
 
 
 export const router = createBrowserRouter([
@@ -53,7 +54,7 @@ export const router = createBrowserRouter([
         path: 'my-tips',
         element: (
           <PrivateRoute>
-            <MyTips />
+           <MyTips/>
           </PrivateRoute>
         ),
       },
@@ -66,13 +67,13 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'update-tip/:id',
-        element: (
-          <PrivateRoute>
-            <UpdateTip />
-          </PrivateRoute>
-        ),
-      },
+         path: 'update-tip/:tipId', 
+         element: (
+    <PrivateRoute>
+      <UpdateTip />
+    </PrivateRoute>
+  ),
+},
     ],
   },
 ]);

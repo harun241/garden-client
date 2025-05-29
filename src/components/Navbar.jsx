@@ -75,6 +75,18 @@ const Navbar = () => {
           Home
         </NavLink>
 
+        <NavLink
+          to="/browse-tips"
+          className={({ isActive }) =>
+            isActive
+              ? "text-green-700 underline"
+              : "hover:text-green-600"
+          }
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          Browse-Tips
+        </NavLink>
+
         {user && (
           <NavLink
             to="/sharedtip"

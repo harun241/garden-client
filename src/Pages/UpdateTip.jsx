@@ -1,11 +1,180 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
-const UpdateTip = () => {
-    return (
+const UpdateTipPage = ({ user }) => {
+  const { tipId } = useParams();
+  const navigate = useNavigate();
+
+  const [tipData, setTipData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [submitLoading, setSubmitLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [successMsg, setSuccessMsg] = useState('');
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/garden-tips/${tipId}`)
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to load tip data');
+        return res.json();
+      })
+      .then((data) => {
+        setTipData(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, [tipId]);
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setTipData((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitLoading(true);
+    setError(null);
+    setSuccessMsg('');
+
+    const updatedTip = {
+      title: tipData.title,
+      plantType: tipData.plantType,
+      difficultyLevel: tipData.difficultyLevel,
+      description: tipData.description,
+      imagesUrl: tipData.imagesUrl,
+      isPublic: tipData.isPublic,
+    };
+
+    fetch(`http://localhost:3000/api/garden-tips/${tipId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedTip),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to update tip');
+        return res.json();
+      })
+      .then(() => {
+        setSuccessMsg('Tip updated successfully!');
+        setSubmitLoading(false);
+        setTimeout(() => {
+          navigate('/my-tips');
+        }, 1500);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setSubmitLoading(false);
+      });
+  };
+
+  if (loading) return <p className="text-center mt-10">Loading tip data...</p>;
+  if (error) return <p className="text-red-500 text-center mt-10">Error: {error}</p>;
+  if (!tipData) return null;
+
+  return (
+    <div className="max-w-2xl mx-auto mt-10 p-6 border rounded-lg shadow-md bg-white">
+      <h2 className="text-2xl font-semibold mb-6 text-center">Update Garden Tip</h2>
+
+      <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-            UpdateTip
+          <label className="block mb-1 font-medium">Title:</label>
+          <input
+            type="text"
+            name="title"
+            value={tipData.title}
+            onChange={handleChange}
+            required
+            className="w-full border px-3 py-2 rounded"
+          />
         </div>
-    );
+
+        <div>
+          <label className="block mb-1 font-medium">Plant Type:</label>
+          <input
+            type="text"
+            name="plantType"
+            value={tipData.plantType}
+            onChange={handleChange}
+            required
+            className="w-full border px-3 py-2 rounded"
+          />
+        </div>
+
+        <div>
+          <label className="block mb-1 font-medium">Difficulty Level:</label>
+          <select
+            name="difficultyLevel"
+            value={tipData.difficultyLevel}
+            onChange={handleChange}
+            required
+            className="w-full border px-3 py-2 rounded"
+          >
+            <option value="">Select difficulty</option>
+            <option value="Easy">Easy</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Hard">Hard</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block mb-1 font-medium">Description:</label>
+          <textarea
+            name="description"
+            value={tipData.description}
+            onChange={handleChange}
+            required
+            className="w-full border px-3 py-2 rounded h-28"
+          />
+        </div>
+
+        <div>
+          <label className="block mb-1 font-medium">Image URL:</label>
+          <input
+            type="url"
+            name="imagesUrl"
+            value={tipData.imagesUrl || ''}
+            onChange={handleChange}
+            className="w-full border px-3 py-2 rounded"
+          />
+        </div>
+
+        <div className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            name="isPublic"
+            checked={tipData.isPublic || false}
+            onChange={handleChange}
+          />
+          <label className="font-medium">Make this tip public</label>
+        </div>
+
+        <fieldset className="border-t pt-4">
+          <legend className="text-lg font-semibold">User Info</legend>
+          <p className="text-gray-600">
+            <strong>Name:</strong> {tipData.name || user?.name}
+          </p>
+          <p className="text-gray-600">
+            <strong>Email:</strong> {tipData.email || user?.email}
+          </p>
+        </fieldset>
+
+        <button
+          type="submit"
+          disabled={submitLoading}
+          className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+        >
+          {submitLoading ? 'Updating...' : 'Update Tip'}
+        </button>
+      </form>
+
+      {successMsg && <p className="text-green-600 mt-4 text-center">{successMsg}</p>}
+    </div>
+  );
 };
 
-export default UpdateTip;
+export default UpdateTipPage;
