@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -11,47 +10,53 @@ import auth from "../firebase.config";
 
 const provider = new GoogleAuthProvider();
 
-const Login = ({ setUser }) => {
+const Login = ({ setUser, user }) => {
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
-  const handleEmailLogin = (e) => {
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
+
+  const handleEmailLogin = async (e) => {
     e.preventDefault();
     const { email, password } = form;
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const loggedInUser = userCredential.user;
-        setUser({
-          email: loggedInUser.email,
-          name: loggedInUser.displayName || loggedInUser.email.split("@")[0],
-        });
-        toast.success("Login successful!");
-        navigate("/");
-      })
-      .catch((error) => {
-        toast.error(error.message);
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const loggedInUser = userCredential.user;
+      setUser({
+        email: loggedInUser.email,
+        name: loggedInUser.displayName || loggedInUser.email.split("@")[0],
       });
+      toast.success("Login successful!");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
-  const handleGoogleLogin = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const loggedInUser = result.user;
-        setUser({
-          email: loggedInUser.email,
-          name: loggedInUser.displayName || loggedInUser.email.split("@")[0],
-        });
-        toast.success("Google login successful!");
-        navigate("/");
-      })
-      .catch((error) => {
-        toast.error(error.message);
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const loggedInUser = result.user;
+      setUser({
+        email: loggedInUser.email,
+        name: loggedInUser.displayName || loggedInUser.email.split("@")[0],
       });
+      toast.success("Google login successful!");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
+
+  if (user) {
+    return null;
+  }
 
   return (
-    <div className="max-w-sm mx-auto mt-10 border-1 rounded-2xl p-5 shadow">
+    <div className="max-w-sm mx-auto mt-10 border rounded-2xl p-5 shadow">
       <h2 className="text-2xl font-bold mb-4 flex justify-center">Login</h2>
       <form onSubmit={handleEmailLogin} className="space-y-4">
         <input
