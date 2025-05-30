@@ -8,8 +8,8 @@ const TrendTip = () => {
     fetch('http://localhost:3000/trending/tips')
       .then(res => res.json())
       .then(data => {
-        console.log(data); // নিশ্চিত হও যে ঠিক data আসছে
-        setTips(data); // এখন সরাসরি data assign করা যাবে
+        console.log(data); 
+        setTips(data);
         setLoading(false);
       })
       .catch(error => {

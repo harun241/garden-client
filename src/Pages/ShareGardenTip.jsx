@@ -1,9 +1,12 @@
-// src/components/ShareGardenTip.jsx
 import { useState } from "react";
 
 const ShareGardenTip = ({ user }) => {
   if (!user) {
-    return <p style={{ textAlign: "center", marginTop: 20 }}>Please login to share a garden tip.</p>;
+    return (
+      <p style={{ textAlign: "center", marginTop: 20 }}>
+        Please login to share a garden tip.
+      </p>
+    );
   }
 
   const [formData, setFormData] = useState({
@@ -190,6 +193,7 @@ const ShareGardenTip = ({ user }) => {
 
 const containerStyle = {
   maxWidth: 600,
+  width: "90%",
   margin: "2rem auto",
   padding: "1rem",
   border: "1px solid #ccc",
@@ -197,11 +201,13 @@ const containerStyle = {
   fontFamily: "Arial, sans-serif",
   backgroundColor: "#fafafa",
   boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+  boxSizing: "border-box",
 };
 
 const headingStyle = {
   marginBottom: "1rem",
   color: "#2f855a",
+  textAlign: "center",
 };
 
 const labelStyle = {
@@ -218,10 +224,12 @@ const inputStyle = {
   borderRadius: 4,
   border: "1px solid #ccc",
   fontSize: "1rem",
+  boxSizing: "border-box",
 };
 
 const buttonStyle = {
-  padding: "0.7rem 1.5rem",
+  width: "100%",
+  padding: "0.7rem",
   backgroundColor: "#38a169",
   color: "#fff",
   border: "none",
@@ -229,6 +237,7 @@ const buttonStyle = {
   cursor: "pointer",
   fontSize: "1rem",
   fontWeight: "bold",
+  marginTop: 12,
 };
 
 export default ShareGardenTip;
