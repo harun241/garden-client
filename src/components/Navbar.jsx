@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import auth from "../firebase.config";
-import { Link, NavLink } from "react-router-dom";
-
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
   const [showLogout, setShowLogout] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -23,9 +23,16 @@ const Navbar = () => {
     });
   };
 
+  const handlePrivateNavClick = (path) => {
+    if (!user) {
+      navigate('/login');
+    } else {
+      navigate(path);
+    }
+  };
+
   return (
     <nav className="bg-green-100 shadow-md px-4 py-3 max-w-11/12 mx-auto flex flex-wrap md:flex-nowrap justify-between items-center">
-
       <Link to="/" className="text-2xl font-bold text-green-700 flex items-center">
         <img
           className="w-10 h-10 rounded-full mr-2"
@@ -35,7 +42,6 @@ const Navbar = () => {
         Banana Garden
       </Link>
 
-  
       <button
         className="md:hidden text-green-700 focus:outline-none"
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -57,7 +63,6 @@ const Navbar = () => {
         </svg>
       </button>
 
-      {/* Menu Items */}
       <div
         className={`w-full md:w-auto flex flex-col md:flex-row gap-4 md:gap-6 mt-3 md:mt-0 ${
           mobileMenuOpen ? "block" : "hidden"
@@ -87,19 +92,18 @@ const Navbar = () => {
           Browse-Tips
         </NavLink>
 
-        {user && (
-          <NavLink
-            to="/sharedtip"
-            className={({ isActive }) =>
-              isActive
-                ? "text-green-700 underline"
-                : "hover:text-green-600"
-            }
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Share a Garden Tip
-          </NavLink>
-        )}
+        {/* Share a Garden Tip */}
+        <a
+          href="#!"
+          onClick={(e) => {
+            e.preventDefault();
+            handlePrivateNavClick('/sharedtip');
+            setMobileMenuOpen(false);
+          }}
+          className="hover:text-green-600 cursor-pointer"
+        >
+          Share a Garden Tip
+        </a>
 
         <NavLink
           to="/explore-gardeners"
@@ -113,21 +117,19 @@ const Navbar = () => {
           Explore Gardeners
         </NavLink>
 
-        {user && (
-          <NavLink
-            to="/my-tips"
-            className={({ isActive }) =>
-              isActive
-                ? "text-green-700 underline"
-                : "hover:text-green-600"
-            }
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            My Tips
-          </NavLink>
-        )}
+        {/* My Tips */}
+        <a
+          href="#!"
+          onClick={(e) => {
+            e.preventDefault();
+            handlePrivateNavClick('/my-tips');
+            setMobileMenuOpen(false);
+          }}
+          className="hover:text-green-600 cursor-pointer"
+        >
+          My Tips
+        </a>
       </div>
-
 
       <div className="relative mt-3 md:mt-0">
         {!user ? (
