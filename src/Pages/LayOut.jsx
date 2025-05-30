@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Outlet, useLocation } from 'react-router';
@@ -14,16 +14,32 @@ const LayOut = () => {
     const hideTestimonial = location.pathname === '/login' || location.pathname === '/register';
     const hideFooter = location.pathname === '/login' || location.pathname === '/register';
 
+   
+    const [theme, setTheme] = useState("light");
+
+    useEffect(() => {
+        const savedTheme = localStorage.getItem("theme") || "light";
+        setTheme(savedTheme);
+        document.documentElement.setAttribute("data-theme", savedTheme);
+    }, []);
+
+    const toggleTheme = () => {
+        const newTheme = theme === "light" ? "dark" : "light";
+        setTheme(newTheme);
+        document.documentElement.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+    };
+
     return (
         <div>
-            <Navbar />
+            
+            <Navbar toggleTheme={toggleTheme} theme={theme} />
 
             <Outlet />
 
             {!hideTestimonial && <Testimonial />}
             {!hideFooter && <Footer />}
 
-         
             <ToastContainer 
                 position="top-right"
                 autoClose={3000}

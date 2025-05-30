@@ -26,10 +26,11 @@ const testimonials = [
 
 const Testimonial = () => {
   return (
-    <section className="bg-gray-50 py-12 px-4">
-      <h2 className="text-3xl font-semibold text-center text-gray-800 mb-10">
-        What Our Users Say
-      </h2>
+    <section className=" py-12 px-4">
+      <h2 className="text-3xl bg-white max-w-fit font-semibold text-gray-800 mb-10 mx-auto">
+  What Our Users Say
+</h2>
+
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {testimonials.map(({ id, name, feedback, photo }) => (
           <div

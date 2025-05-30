@@ -3,7 +3,7 @@ import { useState } from "react";
 const ShareGardenTip = ({ user }) => {
   if (!user) {
     return (
-      <p style={{ textAlign: "center", marginTop: 20 }}>
+      <p className="text-center mt-5 text-gray-700 dark:text-gray-200">
         Please login to share a garden tip.
       </p>
     );
@@ -64,11 +64,13 @@ const ShareGardenTip = ({ user }) => {
   };
 
   return (
-    <div style={containerStyle}>
-      <h2 style={headingStyle}>➕ Share a Garden Tip</h2>
-      <form onSubmit={handleSubmit}>
-        <label style={labelStyle}>
-          Title:
+    <div className="max-w-xl w-[90%] mx-auto mt-8 p-6 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 shadow-md">
+      <h2 className="text-xl font-semibold text-center text-green-700 dark:text-green-400 mb-6">
+        ➕ Share a Garden Tip
+      </h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label className="font-bold text-gray-700 dark:text-gray-300 block mb-1">Title:</label>
           <input
             type="text"
             name="title"
@@ -76,12 +78,12 @@ const ShareGardenTip = ({ user }) => {
             onChange={handleChange}
             placeholder="How I Grow Tomatoes Indoors"
             required
-            style={inputStyle}
+            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
           />
-        </label>
+        </div>
 
-        <label style={labelStyle}>
-          Plant Type/Topic:
+        <div>
+          <label className="font-bold text-gray-700 dark:text-gray-300 block mb-1">Plant Type/Topic:</label>
           <input
             type="text"
             name="plantType"
@@ -89,27 +91,27 @@ const ShareGardenTip = ({ user }) => {
             onChange={handleChange}
             placeholder="Tomato, Herbs, etc."
             required
-            style={inputStyle}
+            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
           />
-        </label>
+        </div>
 
-        <label style={labelStyle}>
-          Difficulty Level:
+        <div>
+          <label className="font-bold text-gray-700 dark:text-gray-300 block mb-1">Difficulty Level:</label>
           <select
             name="difficultyLevel"
             value={formData.difficultyLevel}
             onChange={handleChange}
             required
-            style={inputStyle}
+            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
           >
             <option value="Easy">Easy</option>
             <option value="Medium">Medium</option>
             <option value="Hard">Hard</option>
           </select>
-        </label>
+        </div>
 
-        <label style={labelStyle}>
-          Description:
+        <div>
+          <label className="font-bold text-gray-700 dark:text-gray-300 block mb-1">Description:</label>
           <textarea
             name="description"
             value={formData.description}
@@ -117,127 +119,81 @@ const ShareGardenTip = ({ user }) => {
             placeholder="Write your detailed garden tip here..."
             rows={5}
             required
-            style={{ ...inputStyle, resize: "vertical" }}
+            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-vertical"
           />
-        </label>
+        </div>
 
-        <label style={labelStyle}>
-          Images URL:
+        <div>
+          <label className="font-bold text-gray-700 dark:text-gray-300 block mb-1">Images URL:</label>
           <input
             type="url"
             name="imagesUrl"
             value={formData.imagesUrl}
             onChange={handleChange}
             placeholder="img url"
-            style={inputStyle}
+            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
           />
-        </label>
+        </div>
 
-        <label style={labelStyle}>
-          Category:
+        <div>
+          <label className="font-bold text-gray-700 dark:text-gray-300 block mb-1">Category:</label>
           <select
             name="category"
             value={formData.category}
             onChange={handleChange}
             required
-            style={inputStyle}
+            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
           >
             <option value="Composting">Composting</option>
             <option value="Plant Care">Plant Care</option>
             <option value="Vertical Gardening">Vertical Gardening</option>
             <option value="Other">Other</option>
           </select>
-        </label>
+        </div>
 
-        <label style={labelStyle}>
-          Availability:
+        <div>
+          <label className="font-bold text-gray-700 dark:text-gray-300 block mb-1">Availability:</label>
           <select
             name="availability"
             value={formData.availability}
             onChange={handleChange}
             required
-            style={inputStyle}
+            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
           >
             <option value="Public">Public</option>
             <option value="Hidden">Hidden</option>
           </select>
-        </label>
+        </div>
 
-        <label style={labelStyle}>
-          User Email:
+        <div>
+          <label className="font-bold text-gray-700 dark:text-gray-300 block mb-1">User Email:</label>
           <input
             type="email"
             value={user?.email || ""}
             readOnly
-            style={{ ...inputStyle, backgroundColor: "#f0f0f0" }}
+            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white"
           />
-        </label>
+        </div>
 
-        <label style={labelStyle}>
-          User Name:
+        <div>
+          <label className="font-bold text-gray-700 dark:text-gray-300 block mb-1">User Name:</label>
           <input
             type="text"
             value={user?.displayName || ""}
             readOnly
-            style={{ ...inputStyle, marginBottom: 24, backgroundColor: "white" }}
+            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
           />
-        </label>
+        </div>
 
-        <button type="submit" style={buttonStyle}>
+        <button
+          type="submit"
+          className="w-full p-3 mt-4 bg-green-600 hover:bg-green-700 text-white font-bold rounded"
+        >
           Submit Tip
         </button>
       </form>
     </div>
   );
-};
-
-const containerStyle = {
-  maxWidth: 600,
-  width: "90%",
-  margin: "2rem auto",
-  padding: "1rem",
-  border: "1px solid #ccc",
-  borderRadius: 8,
-  fontFamily: "Arial, sans-serif",
-  backgroundColor: "#fafafa",
-  boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-  boxSizing: "border-box",
-};
-
-const headingStyle = {
-  marginBottom: "1rem",
-  color: "#2f855a",
-  textAlign: "center",
-};
-
-const labelStyle = {
-  display: "block",
-  marginBottom: 6,
-  fontWeight: "bold",
-};
-
-const inputStyle = {
-  width: "100%",
-  padding: "0.5rem",
-  marginTop: 4,
-  marginBottom: 12,
-  borderRadius: 4,
-  border: "1px solid #ccc",
-  fontSize: "1rem",
-  boxSizing: "border-box",
-};
-
-const buttonStyle = {
-  width: "100%",
-  padding: "0.7rem",
-  backgroundColor: "#38a169",
-  color: "#fff",
-  border: "none",
-  borderRadius: 4,
-  cursor: "pointer",
-  fontSize: "1rem",
-  fontWeight: "bold",
-  marginTop: 12,
 };
 
 export default ShareGardenTip;

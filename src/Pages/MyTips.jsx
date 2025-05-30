@@ -6,7 +6,7 @@ const MyTips = ({ user }) => {
   const [tips, setTips] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [deleteTarget, setDeleteTarget] = useState(null); 
+  const [deleteTarget, setDeleteTarget] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,9 +31,10 @@ const MyTips = ({ user }) => {
     if (!deleteTarget) return;
 
     try {
-      const res = await fetch(`http://localhost:3000/api/garden-tips/${deleteTarget._id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `http://localhost:3000/api/garden-tips/${deleteTarget._id}`,
+        { method: "DELETE" }
+      );
       if (!res.ok) throw new Error("Failed to delete tip");
 
       setTips((prevTips) => prevTips.filter((tip) => tip._id !== deleteTarget._id));
@@ -41,7 +42,7 @@ const MyTips = ({ user }) => {
     } catch (err) {
       toast.error(`Error: ${err.message}`);
     } finally {
-      setDeleteTarget(null); 
+      setDeleteTarget(null);
     }
   };
 
@@ -50,19 +51,28 @@ const MyTips = ({ user }) => {
   };
 
   if (loading) return <p className="text-center py-10">Loading your tips...</p>;
-  if (error) return <p className="text-center py-10 text-red-600">Error: {error}</p>;
+  if (error)
+    return (
+      <p className="text-center py-10 text-red-600 dark:text-red-400">
+        Error: {error}
+      </p>
+    );
 
   return (
     <div className="max-w-5xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-6 text-center">My Shared Garden Tips</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center dark:text-white">
+        My Shared Garden Tips
+      </h2>
 
       {tips.length === 0 ? (
-        <p className="text-center">You haven't shared any tips yet.</p>
+        <p className="text-center dark:text-gray-300">
+          You haven't shared any tips yet.
+        </p>
       ) : (
         <div className="overflow-x-auto">
-          <table className="min-w-full border text-sm text-left">
+          <table className="min-w-full border text-sm text-left dark:text-gray-200">
             <thead>
-              <tr className="bg-gray-100 border-b">
+              <tr className="bg-gray-100 dark:bg-gray-800 border-b dark:border-gray-700">
                 <th className="p-3">Title</th>
                 <th className="p-3">Plant Type</th>
                 <th className="p-3">Difficulty</th>
@@ -72,11 +82,16 @@ const MyTips = ({ user }) => {
             </thead>
             <tbody>
               {tips.map((tip) => (
-                <tr key={tip._id} className="border-b hover:bg-gray-50">
+                <tr
+                  key={tip._id}
+                  className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white transition-colors duration-200"
+                >
                   <td className="p-3">{tip.title}</td>
                   <td className="p-3">{tip.plantType}</td>
                   <td className="p-3">{tip.difficultyLevel}</td>
-                  <td className="p-3">{tip.isPublic ? "Public" : "Private"}</td>
+                  <td className="p-3">
+                    {tip.isPublic ? "Public" : "Private"}
+                  </td>
                   <td className="p-3 space-x-2">
                     <button
                       onClick={() => handleUpdate(tip._id)}
@@ -98,18 +113,20 @@ const MyTips = ({ user }) => {
         </div>
       )}
 
-    
       {deleteTarget && (
-        <div className="fixed inset-0  bg-opacity-40 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded shadow-xl w-[90%] max-w-md">
-            <h3 className="text-xl font-semibold mb-4 text-red-600">
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded shadow-xl w-[90%] max-w-md">
+            <h3 className="text-xl font-semibold mb-4 text-red-600 dark:text-red-400">
               Confirm Deletion
             </h3>
-            <p>Are you sure you want to delete the tip: <strong>{deleteTarget.title}</strong>?</p>
+            <p className="dark:text-gray-200">
+              Are you sure you want to delete the tip:{" "}
+              <strong>{deleteTarget.title}</strong>?
+            </p>
             <div className="mt-6 flex justify-end gap-3">
               <button
                 onClick={() => setDeleteTarget(null)}
-                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                className="px-4 py-2 bg-gray-300 dark:bg-gray-600 dark:text-white rounded hover:bg-gray-400 dark:hover:bg-gray-500"
               >
                 Cancel
               </button>
