@@ -1,12 +1,14 @@
 import React from "react";
+import { Zoom, Fade } from "react-awesome-reveal";
+import LottieAnimation from "./LottieAnimation";
+
 
 const testimonials = [
   {
     id: 1,
     name: "Oeishi",
     feedback: "Amazing gardening tips! My plants are thriving now.",
-    photo:
-      "https://i.ibb.co/mrM39XM4/businesswoman-posing-23-2148142829.jpg",
+    photo: "https://i.ibb.co/mrM39XM4/businesswoman-posing-23-2148142829.jpg",
   },
   {
     id: 2,
@@ -17,34 +19,40 @@ const testimonials = [
   {
     id: 3,
     name: "Maya",
-    feedback:
-      "Love the plant care guides, very detailed and easy to follow.",
-    photo:
-      "https://i.ibb.co/GQ2wW1FP/brunette-business-woman-with-wavy-long-hair-blue-eyes-stands-holding-notebook-hands-197531-343.jpg",
+    feedback: "Love the plant care guides, very detailed and easy to follow.",
+    photo: "https://i.ibb.co/GQ2wW1FP/brunette-business-woman-with-wavy-long-hair-blue-eyes-stands-holding-notebook-hands-197531-343.jpg",
   },
 ];
 
 const Testimonial = () => {
   return (
-    <section className=" py-12 px-4">
-      <h2 className="text-3xl bg-white max-w-fit font-semibold text-gray-800 mb-10 mx-auto">
-  What Our Users Say
-</h2>
+    <section className="py-12 px-4 bg-gray-50 dark:bg-gray-900">
+     
+      <LottieAnimation/>
+
+      <Fade triggerOnce>
+        <h2 className="text-3xl font-semibold text-gray-800 dark:text-white mb-10 text-center">
+          What Our Users Say
+        </h2>
+      </Fade>
 
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {testimonials.map(({ id, name, feedback, photo }) => (
-          <div
-            key={id}
-            className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center"
-          >
-            <img
-              src={photo}
-              alt={name}
-              className="w-16 h-16 rounded-full object-cover mb-4"
-            />
-            <p className="italic text-gray-700 mb-3">"{feedback}"</p>
-            <p className="font-semibold text-green-600">- {name}</p>
-          </div>
+          <Zoom triggerOnce key={id}>
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md flex flex-col items-center text-center transition-all">
+              <img
+                src={photo}
+                alt={name}
+                className="w-16 h-16 rounded-full object-cover mb-4"
+              />
+              <p className="italic text-gray-700 dark:text-gray-300 mb-3">
+                "{feedback}"
+              </p>
+              <p className="font-semibold text-green-600 dark:text-green-400">
+                - {name}
+              </p>
+            </div>
+          </Zoom>
         ))}
       </div>
     </section>

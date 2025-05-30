@@ -4,6 +4,7 @@ import FeaturedGardeners from '../components/FeaturedGardeners';
 import TrendTip from '../components/TrendTip';
 
 
+
 const Home = () => {
     
     return (

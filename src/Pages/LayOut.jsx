@@ -7,6 +7,8 @@ import Testimonial from '../components/Tesimonials';
 import Navbar from '../components/Navbar';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Fade, Slide, Zoom, Bounce } from "react-awesome-reveal";
+
 
 const LayOut = () => {
     const location = useLocation();
@@ -33,12 +35,18 @@ const LayOut = () => {
     return (
         <div>
             
+             <Fade>
             <Navbar toggleTheme={toggleTheme} theme={theme} />
 
             <Outlet />
 
             {!hideTestimonial && <Testimonial />}
             {!hideFooter && <Footer />}
+
+
+
+      
+    </Fade>
 
             <ToastContainer 
                 position="top-right"
