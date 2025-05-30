@@ -1,12 +1,26 @@
-# React + Vite
+🌿 Gardening Community & Resource Hub
+Live Site:https://gardening-community-e9b5a.web.app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🌟 Features
+🔐 Authentication System: Secure login/register with Firebase (Email/Password + Google login).
 
-Currently, two official plugins are available:
+🧑‍🌾 CRUD Functionality: Authenticated users can add, edit, and delete gardening tips and resources.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🌱 Category Filtering: Easily browse posts and resources by plant type or gardening category.
 
-## Expanding the ESLint configuration
+🌙 Dark/Light Mode Toggle: Switch between dark and light themes for a better viewing experience.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+📱 Responsive Design: Fully responsive layout optimized for all devices.
+
+🎨 Modern UI Libraries: Beautiful and interactive UI built using libraries like React Icons, Tailwind CSS, and React Toastify.
+
+📖 Project Description
+This Gardening Community & Resource Hub is a full-stack web application designed for gardening enthusiasts. It allows users to share and explore gardening tips, resources, and plant-related knowledge. Authenticated users can contribute to the platform through CRUD operations, and the UI offers a dynamic and visually pleasing experience with filtering options and theming support. This platform fosters a collaborative and engaging environment for gardeners of all skill levels.
+
+
+
+
+
+
+
+

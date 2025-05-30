@@ -12,7 +12,7 @@ const MyTips = ({ user }) => {
   useEffect(() => {
     if (!user) return;
 
-    fetch(`http://localhost:3000/api/garden-tips?email=${user.email}`)
+    fetch(`https://gardening-community.vercel.app/api/garden-tips?email=${user.email}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch your tips");
         return res.json();
@@ -32,7 +32,7 @@ const MyTips = ({ user }) => {
 
     try {
       const res = await fetch(
-        `http://localhost:3000/api/garden-tips/${deleteTarget._id}`,
+        `https://gardening-community.vercel.app/api/garden-tips/${deleteTarget._id}`,
         { method: "DELETE" }
       );
       if (!res.ok) throw new Error("Failed to delete tip");

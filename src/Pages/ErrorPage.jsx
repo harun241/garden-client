@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 const ErrorPage = () => {
   const error = useRouteError();
-  console.error(error);
+  //console.error(error);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-green-50 px-4 text-center">

@@ -5,15 +5,15 @@ const TrendTip = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:3000/trending/tips')
+    fetch('https://gardening-community.vercel.app/trending/tips')
       .then(res => res.json())
       .then(data => {
-        console.log(data); 
+        //console.log(data); 
         setTips(data);
         setLoading(false);
       })
       .catch(error => {
-        console.error('Error fetching trending tips:', error);
+       // console.error('Error fetching trending tips:', error);
         setTips([]);
         setLoading(false);
       });

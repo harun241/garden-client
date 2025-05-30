@@ -9,7 +9,7 @@ const TipDetails = () => {
   const [likeLoading, setLikeLoading] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/garden-tips/${id}`)
+    fetch(`https://gardening-community.vercel.app/api/garden-tips/${id}`)
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch tip details');
         return res.json();
@@ -29,7 +29,7 @@ const TipDetails = () => {
     setLikeLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:3000/api/garden-tips/${id}/like`, {
+      const response = await fetch(`https://gardening-community.vercel.app/api/garden-tips/${id}/like`, {
         method: 'PATCH',
       });
       if (!response.ok) throw new Error('Failed to update like');

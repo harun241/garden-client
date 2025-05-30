@@ -4,10 +4,10 @@ const FeaturedGardeners = () => {
   const [gardeners, setGardeners] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/gardeners/active')
+    fetch('https://gardening-community.vercel.app/gardeners/active')
       .then(res => res.json())
       .then(data => setGardeners(data))
-      .catch(error => console.error('Error fetching gardeners:', error));
+     // .catch(error => console.error('Error fetching gardeners:', error));
   }, []);
 
   return (

@@ -10,7 +10,7 @@ const BrowseTips = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/garden-tips')
+    fetch('https://gardening-community.vercel.app/api/garden-tips')
       .then((res) => {
         if (!res.ok) throw new Error('Failed to fetch tips');
         return res.json();

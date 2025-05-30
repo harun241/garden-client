@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD1ZW3PPvuh_ZfOOknGGUIstGGGJFX0kmY",
-  authDomain: "gardening-community-e9b5a.firebaseapp.com",
-  projectId: "gardening-community-e9b5a",
-  storageBucket: "gardening-community-e9b5a.appspot.com", 
-  messagingSenderId: "410828872881",
-  appId: "1:410828872881:web:95be4f593de9e7d14ed690",
-  measurementId: "G-9VBJ04E908"
+  apiKey:import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId:import.meta.env.VITE_appId,
+  measurementId: import.meta.env.VITE_measurementId,
 };
 
 

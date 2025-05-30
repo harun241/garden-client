@@ -12,7 +12,7 @@ const UpdateTipPage = ({ user }) => {
   const [successMsg, setSuccessMsg] = useState('');
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/garden-tips/${tipId}`)
+    fetch(`https://gardening-community.vercel.app/api/garden-tips/${tipId}`)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to load tip data');
         return res.json();
@@ -50,7 +50,7 @@ const UpdateTipPage = ({ user }) => {
       isPublic: tipData.isPublic,
     };
 
-    fetch(`http://localhost:3000/api/garden-tips/${tipId}`, {
+    fetch(`https://gardening-community.vercel.app/api/garden-tips/${tipId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updatedTip),

@@ -7,7 +7,7 @@ function ExploreGardeners() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/gardeners')
+    axios.get('https://gardening-community.vercel.app/gardeners')
       .then(res => {
         setGardeners(res.data);
         setLoading(false);

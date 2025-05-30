@@ -37,7 +37,7 @@ const ShareGardenTip = ({ user }) => {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/api/garden-tips", {
+      const response = await fetch("https://gardening-community.vercel.app/api/garden-tips", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -58,7 +58,7 @@ const ShareGardenTip = ({ user }) => {
         alert("Failed to submit tip.");
       }
     } catch (error) {
-      console.error("Error submitting tip:", error);
+      //console.error("Error submitting tip:", error);
       alert("An error occurred.");
     }
   };
