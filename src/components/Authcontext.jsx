@@ -1,4 +1,3 @@
-// src/components/Authcontext.jsx
 import { createContext, useContext, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import auth from "../firebase.config";
@@ -17,7 +16,8 @@ export const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  const authInfo = { user, loading };
+ 
+  const authInfo = { user, setUser, loading };
 
   return (
     <AuthContext.Provider value={authInfo}>

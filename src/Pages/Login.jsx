@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -7,12 +7,15 @@ import {
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../firebase.config";
+import { useAuth } from "../components/Authcontext";
+
 
 const provider = new GoogleAuthProvider();
 
-const Login = ({ setUser, user }) => {
+const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
+  const { user, setUser } = useAuth(); 
 
   useEffect(() => {
     if (user) {
@@ -51,10 +54,7 @@ const Login = ({ setUser, user }) => {
     }
   };
 
-  // 🔒 If user already logged in, return null or loading spinner
-  if (user) {
-    return null; // or <div>Redirecting...</div> if you want a message
-  }
+  if (user) return null;
 
   return (
     <div className="max-w-sm mx-auto mt-10 border rounded-2xl p-5 shadow">
