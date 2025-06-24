@@ -60,7 +60,7 @@ const MyTips = ({ user }) => {
 
   return (
     <div className="max-w-5xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-6 text-center dark:text-white">
+      <h2 className="text-2xl font-bold mb-6 text-center dark:text-white light:text-black">
         My Shared Garden Tips
       </h2>
 
@@ -72,12 +72,12 @@ const MyTips = ({ user }) => {
         <div className="overflow-x-auto">
           <table className="min-w-full border text-sm text-left dark:text-gray-200">
             <thead>
-              <tr className="bg-gray-100 dark:bg-gray-800 border-b dark:border-gray-700">
-                <th className="p-3">Title</th>
-                <th className="p-3">Plant Type</th>
-                <th className="p-3">Difficulty</th>
-                <th className="p-3">Visibility</th>
-                <th className="p-3">Actions</th>
+              <tr className="bg-gray-100 dark:bg-gray-800 border-b dark:border-gray-700 ">
+                <th className="p-3 text-green-800">Title</th>
+                <th className="p-3 text-green-800">Plant Type</th>
+                <th className="p-3 text-green-800">Difficulty</th>
+                <th className="p-3 text-green-800">Visibility</th>
+                <th className="p-3 text-green-800">Actions</th>
               </tr>
             </thead>
             <tbody>

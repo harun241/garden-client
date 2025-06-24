@@ -1,26 +1,52 @@
-🌿 Gardening Community & Resource Hub
-Live Site:https://gardening-community-e9b5a.web.app
+# 🌿 Gardening Community & Resource Hub
 
-🌟 Features
-🔐 Authentication System: Secure login/register with Firebase (Email/Password + Google login).
+A full-stack gardening platform where users can explore resources, post their plants, share tips, and interact with other gardeners. Includes authentication, post filtering, CRUD features, and responsive UI.
 
-🧑‍🌾 CRUD Functionality: Authenticated users can add, edit, and delete gardening tips and resources.
+![Banner](./screenshot.png) 
 
-🌱 Category Filtering: Easily browse posts and resources by plant type or gardening category.
+---
 
-🌙 Dark/Light Mode Toggle: Switch between dark and light themes for a better viewing experience.
+## 🚀 Live Demo
 
-📱 Responsive Design: Fully responsive layout optimized for all devices.
+🌐 [Visit Live Site](https://gardening-community-e9b5a.web.app)
 
-🎨 Modern UI Libraries: Beautiful and interactive UI built using libraries like React Icons, Tailwind CSS, and React Toastify.
+---
 
-📖 Project Description
-This Gardening Community & Resource Hub is a full-stack web application designed for gardening enthusiasts. It allows users to share and explore gardening tips, resources, and plant-related knowledge. Authenticated users can contribute to the platform through CRUD operations, and the UI offers a dynamic and visually pleasing experience with filtering options and theming support. This platform fosters a collaborative and engaging environment for gardeners of all skill levels.
+## 🛠️ Tech Stack
 
+- **Frontend:** React, React Router DOM, Tailwind CSS, DaisyUI
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB
+- **Authentication:** Firebase Auth (Email/Password & Google)
+- **Tools:** Axios, React Hook Form, Vite
 
+---
 
+## ✨ Features
 
+- 🔐 User authentication (email/password & Google login)
+- 🪴 Add, update, delete your own plant posts
+- 🔍 Filter plants by category (e.g., Indoor, Outdoor, Herbs)
+- 🌙 Light/Dark theme toggle
+- 🖼️ Detailed plant post with images and info
+- 📱 Fully responsive design
 
+---
 
+## 📦 Dependencies
 
+```bash
+Frontend:
+- react
+- react-router-dom
+- tailwindcss
+- daisyui
+- axios
+- firebase
+- react-hook-form
 
+Backend:
+- express
+- cors
+- dotenv
+- mongodb
