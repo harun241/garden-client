@@ -2,7 +2,7 @@
 
 A full-stack gardening platform where users can explore resources, post their plants, share tips, and interact with other gardeners. Includes authentication, post filtering, CRUD features, and responsive UI.
 
-![Banner](./screenshot.png) 
+[banner img](https://i.ibb.co/PzrFVw9w/image.png)
 
 ---
 
