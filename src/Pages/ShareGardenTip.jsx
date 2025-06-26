@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { toast } from "react-toastify";
 const ShareGardenTip = ({ user }) => {
   if (!user) {
     return (
@@ -44,7 +44,7 @@ const ShareGardenTip = ({ user }) => {
       });
 
       if (response.ok) {
-        alert("Tip submitted successfully!");
+        toast.success("Tip submitted successfully!");
         setFormData({
           title: "",
           plantType: "",
@@ -111,15 +111,15 @@ const ShareGardenTip = ({ user }) => {
         </div>
 
         <div>
-          <label className="font-bold text-gray-700 dark:text-gray-300 block mb-1">Description:</label>
+          <label className="font-bold text-gray-700 dark:text-gray-300 block ">Description:</label>
           <textarea
             name="description"
             value={formData.description}
             onChange={handleChange}
             placeholder="Write your detailed garden tip here..."
-            rows={5}
+            rows={3}
             required
-            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-vertical"
+            className="w-full  border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-vertical"
           />
         </div>
 

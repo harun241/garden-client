@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const TipDetails = () => {
   const { id } = useParams();
@@ -25,21 +26,32 @@ const TipDetails = () => {
   }, [id]);
 
   const handleLike = async () => {
-    if (likeLoading) return;
+    if (likeLoading || !tip) return;
+
+    // Optimistically update the UI
+    setTip(prev => ({
+      ...prev,
+      totalLiked: (prev.totalLiked || 0) + 1,
+    }));
     setLikeLoading(true);
 
     try {
       const response = await fetch(`https://gardening-community.vercel.app/api/garden-tips/${id}/like`, {
         method: 'PATCH',
       });
-      if (!response.ok) throw new Error('Failed to update like');
 
-      setTip(prev => ({
-        ...prev,
-        totalLiked: (prev.totalLiked || 0) + 1,
-      }));
+      if (!response.ok) {
+        // Rollback if failed
+        setTip(prev => ({
+          ...prev,
+          totalLiked: (prev.totalLiked || 1) - 1,
+        }));
+        throw new Error('Failed to update like');
+      }
+
+      toast.success("Thanks for liking!");
     } catch (err) {
-      alert(err.message);
+      toast.error(err.message);
     } finally {
       setLikeLoading(false);
     }
@@ -50,46 +62,45 @@ const TipDetails = () => {
   if (!tip) return <p className="text-center py-6">Tip not found</p>;
 
   return (
-    <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-slate-100 shadow-lg rounded-lg mt-8">
-      <h1 className="text-3xl font-bold mb-4 text-center text-green-700">{tip.title}</h1>
+    <div className="max-w-5xl mx-auto p-4 sm:p-6 bg-white dark:bg-gray-800 shadow-md rounded-lg mt-10">
+      <h1 className="text-3xl font-bold mb-6 text-center text-green-700">{tip.title}</h1>
 
-      <div className="flex flex-col sm:flex-row gap-6">
-        {/* Left side: smaller image */}
-        <div className="sm:w-1/3 flex-shrink-0">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        {/* Left - Image */}
+        <div className="w-full h-64 md:h-full">
           <img
-            src={tip.imagesUrl || 'https://via.placeholder.com/400x250?text=No+Image'}
+            src={tip.imagesUrl || 'https://via.placeholder.com/500x300?text=No+Image'}
             alt={tip.title}
-            className="w-full h-auto rounded-md shadow-md object-cover"
+            className="w-full h-full object-cover rounded-md shadow-md"
           />
         </div>
 
-        {/* Right side: Details */}
-        <div className="sm:w-2/3 flex flex-col justify-between">
-          <div className="text-gray-700 text-sm sm:text-base space-y-2">
+        {/* Right - Text */}
+        <div className="flex flex-col justify-between h-full text-gray-800 dark:text-gray-100 space-y-4">
+          <div className="space-y-2 text-sm sm:text-base">
             <p><span className="font-semibold">🌿 Category:</span> {tip.category}</p>
             <p><span className="font-semibold">🪴 Plant Type:</span> {tip.plantType}</p>
             <p><span className="font-semibold">⚙️ Difficulty:</span> {tip.difficultyLevel}</p>
             <p><span className="font-semibold">🔒 Visibility:</span> {tip.isPublic ? 'Public' : 'Private'}</p>
-
-            <p className="mt-3 leading-relaxed">
+            <p className="leading-relaxed">
               <span className="font-semibold">📝 Description:</span><br />
               {tip.description}
             </p>
-
-            <p className="mt-4 text-xs text-gray-600">
-              👤 Shared by: <span className="font-semibold">{tip.name}</span> ({tip.email})
-            </p>
-            <p className="text-xs text-gray-600">❤️ Total Likes: <span className="font-semibold">{tip.totalLiked || 0}</span></p>
           </div>
 
-          <div className="mt-4 sm:mt-6 text-left">
+          <div className="text-xs text-gray-600 dark:text-gray-300">
+            <p>👤 Shared by: <span className="font-semibold">{tip.name}</span> ({tip.email})</p>
+            <p>❤️ Total Likes: <span className="font-semibold">{tip.totalLiked || 0}</span></p>
+          </div>
+
+          <div className="mt-3">
             <button
               onClick={handleLike}
               disabled={likeLoading}
-              className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full transition-colors text-white text-sm font-semibold shadow-md
+              className={`inline-flex items-center gap-2 px-5 py-2 rounded-full transition-colors text-white text-sm font-semibold shadow-md
                 ${likeLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700 active:scale-95'}`}
             >
-              👍 Like This Tip
+              👍 {likeLoading ? 'Liking...' : 'Like This Tip'}
             </button>
           </div>
         </div>
