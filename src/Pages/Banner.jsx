@@ -41,7 +41,7 @@ const Banner = () => {
   ];
 
   return (
-    <div className="relative max-w-7xl mx-auto my-10">
+    <div className="relative max-w-7xl mx-auto mt-20">
       <Slider {...settings}>
         {slides.map((slide, index) => (
           <div key={index}>

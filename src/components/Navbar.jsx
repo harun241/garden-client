@@ -23,7 +23,7 @@ const Navbar = ({ toggleTheme, theme }) => {
 
 
   return (
-    <nav className="bg-green-100 dark:bg-gray-900 shadow-md px-4 py-3 ">
+    <nav className="bg-green-100 h-20 shadow-md px-4 py-3 mt-10 ">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Left: Logo */}
         <Link to="/" className="text-2xl font-bold text-green-700 dark:text-green-400 flex items-center">
@@ -102,7 +102,7 @@ const Navbar = ({ toggleTheme, theme }) => {
                 alt="User"
                 className="w-10 h-10 rounded-full border border-green-400"
               />
-              <span className="absolute text-sm bg-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 dark:bg-gray-700 left-1/2 transform -translate-x-1/2 mt-1">
+              <span className="absolute text-sm bg-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 dark:bg-green-700 left-1 transform -translate-x-1/2 ">
                 {user.displayName || user.email}
               </span>
               {showLogout && (

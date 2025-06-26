@@ -77,42 +77,48 @@ const UpdateTipPage = ({ user }) => {
   if (!tipData) return null;
 
   return (
-    <div className="max-w-2xl mx-auto mt-10 p-6 border border-gray-300 dark:border-gray-600 rounded-lg shadow-md bg-white dark:bg-gray-800">
-      <h2 className="text-2xl font-semibold mb-6 text-center text-green-700 dark:text-green-400">Update Garden Tip</h2>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 px-4 py-10">
+    <div className="w-full max-w-2xl p-6 border border-gray-300 dark:border-gray-600 rounded-lg shadow-md bg-white dark:bg-gray-800">
+      <h2 className="text-2xl font-semibold mb-6 text-center text-green-700 dark:text-green-400">
+        Update Garden Tip
+      </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
-        <div>
-          <label className="block mb-1 font-medium text-gray-800 dark:text-gray-200">Title:</label>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        {/* Title */}
+        <div className="flex flex-col">
+          <label className="mb-1 font-medium text-gray-800 dark:text-gray-200">Title</label>
           <input
             type="text"
             name="title"
             value={tipData.title}
             onChange={handleChange}
             required
-            className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-2 rounded"
+            className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-2 rounded w-full"
           />
         </div>
 
-        <div>
-          <label className="block mb-1 font-medium text-gray-800 dark:text-gray-200">Plant Type:</label>
+        {/* Plant Type */}
+        <div className="flex flex-col">
+          <label className="mb-1 font-medium text-gray-800 dark:text-gray-200">Plant Type</label>
           <input
             type="text"
             name="plantType"
             value={tipData.plantType}
             onChange={handleChange}
             required
-            className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-2 rounded"
+            className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-2 rounded w-full"
           />
         </div>
 
-        <div>
-          <label className="block mb-1 font-medium text-gray-800 dark:text-gray-200">Difficulty Level:</label>
+        {/* Difficulty Level */}
+        <div className="flex flex-col">
+          <label className="mb-1 font-medium text-gray-800 dark:text-gray-200">Difficulty Level</label>
           <select
             name="difficultyLevel"
             value={tipData.difficultyLevel}
             onChange={handleChange}
             required
-            className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-2 rounded"
+            className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-2 rounded w-full"
           >
             <option value="">Select difficulty</option>
             <option value="Easy">Easy</option>
@@ -121,29 +127,33 @@ const UpdateTipPage = ({ user }) => {
           </select>
         </div>
 
-        <div>
-          <label className="block mb-1 font-medium text-gray-800 dark:text-gray-200">Description:</label>
+        {/* Description */}
+        <div className="flex flex-col">
+          <label className="mb-1 font-medium text-gray-800 dark:text-gray-200">Description</label>
           <textarea
             name="description"
             value={tipData.description}
             onChange={handleChange}
             required
-            className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-2 rounded h-28 resize-vertical"
+            rows={3}
+            className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-2 rounded w-full resize-none"
           />
         </div>
 
-        <div>
-          <label className="block mb-1 font-medium text-gray-800 dark:text-gray-200">Image URL:</label>
+        {/* Image URL */}
+        <div className="flex flex-col">
+          <label className="mb-1 font-medium text-gray-800 dark:text-gray-200">Image URL</label>
           <input
             type="url"
             name="imagesUrl"
             value={tipData.imagesUrl || ''}
             onChange={handleChange}
-            className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-2 rounded"
+            className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-2 rounded w-full"
           />
         </div>
 
-        <div className="flex items-center space-x-2">
+        {/* isPublic Checkbox */}
+        <div className="flex items-center gap-2">
           <input
             type="checkbox"
             name="isPublic"
@@ -151,19 +161,21 @@ const UpdateTipPage = ({ user }) => {
             onChange={handleChange}
             className="accent-green-600"
           />
-          <label className="font-medium text-gray-800 dark:text-gray-200">Make this tip public</label>
+          <label className="text-gray-800 dark:text-gray-200">Make this tip public</label>
         </div>
 
-        <fieldset className="border-t border-gray-300 dark:border-gray-600 pt-4">
-          <legend className="text-lg font-semibold text-gray-800 dark:text-gray-200">User Info</legend>
+        {/* User Info */}
+        <div className="border-t border-gray-300 dark:border-gray-600 pt-4">
+          <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">User Info</h4>
           <p className="text-gray-700 dark:text-gray-300">
             <strong>Name:</strong> {tipData.name || user?.name}
           </p>
           <p className="text-gray-700 dark:text-gray-300">
             <strong>Email:</strong> {tipData.email || user?.email}
           </p>
-        </fieldset>
+        </div>
 
+        {/* Submit */}
         <button
           type="submit"
           disabled={submitLoading}
@@ -171,11 +183,15 @@ const UpdateTipPage = ({ user }) => {
         >
           {submitLoading ? 'Updating...' : 'Update Tip'}
         </button>
-      </form>
 
-      {successMsg && <p className="text-green-600 dark:text-green-400 mt-4 text-center">{successMsg}</p>}
+        {successMsg && (
+          <p className="text-green-600 dark:text-green-400 mt-2 text-center">{successMsg}</p>
+        )}
+      </form>
     </div>
-  );
+  </div>
+);
 };
+
 
 export default UpdateTipPage;

@@ -1,11 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Home from '../pages/Home';
-
 import Register from '../pages/Register';
-
 import ExploreGardeners from '../pages/ExploreGardeners';
 import BrowseTips from '../pages/BrowseTips';
-
 import UpdateTip from '../pages/UpdateTip';
 import TipsDetails from '../pages/TipsDetails';
 import ErrorPage from '../pages/ErrorPage';

@@ -59,8 +59,8 @@ const MyTips = ({ user }) => {
     );
 
   return (
-    <div className="max-w-5xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-6 text-center dark:text-white light:text-black">
+    <div className="max-w-5xl mx-auto p-4 mt-20">
+      <h2 className="text-2xl font-bold mb-6 text-center text-green-800 bg-gray-100">
         My Shared Garden Tips
       </h2>
 
@@ -84,7 +84,7 @@ const MyTips = ({ user }) => {
               {tips.map((tip) => (
                 <tr
                   key={tip._id}
-                  className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white transition-colors duration-200"
+                  className="border-b text-black bg-white border-gray-200 dark:border-gray-700 hover:bg-gray-300 dark:hover:bg-gray-100 transition-colors duration-200"
                 >
                   <td className="p-3">{tip.title}</td>
                   <td className="p-3">{tip.plantType}</td>

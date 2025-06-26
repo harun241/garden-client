@@ -7,11 +7,11 @@ const FeaturedGardeners = () => {
     fetch('https://gardening-community.vercel.app/gardeners/active')
       .then(res => res.json())
       .then(data => setGardeners(data))
-     // .catch(error => console.error('Error fetching gardeners:', error));
+    
   }, []);
 
   return (
-    <section className="px-4 sm:px-6 md:px-8 lg:px-10 py-10 bg-green-50 max-w-7xl mx-auto my-20">
+    <section className="px-4 sm:px-6 md:px-8 lg:px-10 py-10 bg-green-50 max-w-7xl mx-auto mt-20">
       <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-center mb-8 text-green-800">
         🌿 Featured Gardeners
       </h2>
