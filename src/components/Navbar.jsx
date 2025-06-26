@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import React, { useState} from "react";
+import {  signOut } from "firebase/auth";
 import auth from "../Firebase.config";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../components/Authcontext";
 
 const Navbar = ({ toggleTheme, theme }) => {
-  const [user, setUser] = useState(null);
+  const { user } = useAuth(); 
   const [showLogout, setShowLogout] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-    return () => unsubscribe();
-  }, []);
+
 
   const handleLogout = () => {
     signOut(auth).then(() => {
@@ -24,13 +20,7 @@ const Navbar = ({ toggleTheme, theme }) => {
     });
   };
 
-  const handlePrivateNavClick = (path) => {
-    if (!user) {
-      navigate("/login");
-    } else {
-      navigate(path);
-    }
-  };
+
 
   return (
     <nav className="bg-green-100 dark:bg-gray-900 shadow-md px-4 py-3 ">
@@ -77,9 +67,13 @@ const Navbar = ({ toggleTheme, theme }) => {
         <div className={`flex-1 md:flex md:items-center md:gap-6 justify-center ${mobileMenuOpen ? "block" : "hidden"} md:block`}>
           <NavLink to="/" className="nav-link text-green-800">Home</NavLink>
           <NavLink to="/browse-tips" className="nav-link text-green-800">Browse Tips</NavLink>
-          <span onClick={() => handlePrivateNavClick("/sharedtip")} className="nav-link cursor-pointer text-green-800">Share a Garden Tip</span>
-          <NavLink to="/explore-gardeners" className="nav-link text-green-800">Explore Gardeners</NavLink>
-          <span onClick={() => handlePrivateNavClick("/my-tips")} className="nav-link cursor-pointer text-green-800">My Tips</span>
+           <NavLink to="/explore-gardeners" className="nav-link text-green-800">Explore Gardeners</NavLink>
+           {user && (
+    <>
+      <span onClick={() => navigate("/sharedtip")} className="nav-link cursor-pointer text-green-800">Share a Garden Tip</span>
+      <span onClick={() => navigate("/my-tips")} className="nav-link cursor-pointer text-green-800">My Tips</span>
+    </>
+  )}
         </div>
 
         {/* Right: Theme + Auth */}
