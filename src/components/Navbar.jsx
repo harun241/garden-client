@@ -9,7 +9,7 @@ const Navbar = ({ toggleTheme, theme }) => {
   const [showLogout, setShowLogout] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
-const [imgLoaded, setImgLoaded] = useState(false);
+
   const handleLogout = () => {
     signOut(auth).then(() => {
       setShowLogout(false);
@@ -18,18 +18,14 @@ const [imgLoaded, setImgLoaded] = useState(false);
     });
   };
 
-  // NavLink এ active class যুক্ত করার জন্য একটা function
   const activeClassName = "border-b-2 border-green-700 text-green-900";
   const inactiveClassName = "text-green-800 hover:border-b-2 hover:border-green-500";
 
   return (
-    <nav className="bg-green-100 h-20 shadow-md px-4 py-3 mt-10">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        {/* Left: Logo */}
-        <Link
-          to="/"
-          className="text-2xl font-bold text-green-800 dark:text-green-400 flex items-center"
-        >
+    <nav className="bg-green-100 shadow-md  top-0 left-0 right-0 ">
+      <div className="w-11/12 mx-auto flex justify-between items-center h-20 relative">
+        {/* Logo */}
+        <Link to="/" className="text-2xl font-bold text-green-800 dark:text-green-400 flex items-center">
           <img
             className="w-10 h-10 rounded-full mr-2"
             src="https://i.ibb.co/xKCnLw6C/5532983.webp"
@@ -40,45 +36,31 @@ const [imgLoaded, setImgLoaded] = useState(false);
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden"
+          className="md:hidden z-50"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle Menu"
         >
           <svg
-            className="w-6 h-6"
+            className="w-6 h-6 text-green-800"
             fill="none"
             stroke="currentColor"
             strokeWidth={2}
             viewBox="0 0 24 24"
           >
             {mobileMenuOpen ? (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             ) : (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             )}
           </svg>
         </button>
 
-        {/* Middle: Nav Links */}
-        <div
-          className={`flex-1 md:flex md:items-center md:gap-6 justify-center ${
-            mobileMenuOpen ? "block" : "hidden"
-          } md:block`}
-        >
+        {/* Desktop Nav Links */}
+        <div className="hidden md:flex items-center gap-6">
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `nav-link px-3 py-2 font-medium ${
-                isActive ? activeClassName : inactiveClassName
-              }`
+              `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
             }
           >
             Home
@@ -86,9 +68,7 @@ const [imgLoaded, setImgLoaded] = useState(false);
           <NavLink
             to="/browse-tips"
             className={({ isActive }) =>
-              `nav-link px-3 py-2 font-medium ${
-                isActive ? activeClassName : inactiveClassName
-              }`
+              `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
             }
           >
             Browse Tips
@@ -96,69 +76,59 @@ const [imgLoaded, setImgLoaded] = useState(false);
           <NavLink
             to="/explore-gardeners"
             className={({ isActive }) =>
-              `nav-link px-3 py-2 font-medium ${
-                isActive ? activeClassName : inactiveClassName
-              }`
+              `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
             }
           >
             Explore Gardeners
           </NavLink>
-
           {user && (
             <>
-              <span
-                onClick={() => navigate("/sharedtip")}
-                className="nav-link cursor-pointer px-3 py-2 font-medium text-green-800 hover:border-b-2 hover:border-green-500"
+              <NavLink
+                to="/sharedtip"
+                className={({ isActive }) =>
+                  `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
+                }
               >
-                Share a Garden Tip
-              </span>
-              <span
-                onClick={() => navigate("/my-tips")}
-                className="nav-link cursor-pointer px-3 py-2 font-medium text-green-800 hover:border-b-2 hover:border-green-500"
+                Share Tip
+              </NavLink>
+              <NavLink
+                to="/my-tips"
+                className={({ isActive }) =>
+                  `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
+                }
               >
                 My Tips
-              </span>
+              </NavLink>
             </>
           )}
         </div>
 
-        {/* Right: Theme + Auth */}
-        <div className="flex items-center gap-4">
+        {/* Right Side: Theme + Auth */}
+        <div className="hidden md:flex items-center gap-4">
           <button
             onClick={toggleTheme}
-            className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700"
+            className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 text-sm"
           >
-            {theme === "light" ? "Dark" : "Light"} Mode
+            {theme === "light" ? "Dark" : "Light"}
           </button>
 
           {!user ? (
-            <NavLink
-              to="/login"
-              className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-            >
+            <NavLink to="/login" className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 text-sm">
               Login
             </NavLink>
           ) : (
-            <div
-              className="relative group inline-block cursor-pointer"
-              onClick={() => setShowLogout(!showLogout)}
-            >
+            <div className="relative group inline-block cursor-pointer" onClick={() => setShowLogout(!showLogout)}>
               <img
-                src={
-                  user.photoURL || "https://i.ibb.co/FKkzmYy/default-user.png"
-                }
+                src={user.photoURL || "https://i.ibb.co/FKkzmYy/default-user.png"}
                 alt="User"
                 className="w-10 h-10 rounded-full border border-green-400"
               />
-              <span className="absolute text-sm bg-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 dark:bg-white left-1 transform  ">
+              <span className="absolute text-xs bg-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 dark:bg-white left-1 transform -translate-x-1/2 whitespace-nowrap">
                 {user.displayName || user.email}
               </span>
               {showLogout && (
-                <div className="absolute right-0 mt-2 bg-white border rounded shadow p-2 z-20 ">
-                  <button
-                    onClick={handleLogout}
-                    className="text-red-600 hover:underline"
-                  >
+                <div className="absolute right-0 mt-2 bg-white border rounded shadow p-2 z-50">
+                  <button onClick={handleLogout} className="text-red-600 hover:underline text-sm">
                     Logout
                   </button>
                 </div>
@@ -166,6 +136,46 @@ const [imgLoaded, setImgLoaded] = useState(false);
             </div>
           )}
         </div>
+
+        
+        {mobileMenuOpen && (
+          <div className=" lg:hidden md:hidden bg-green-100 z-50 px-4 mt-24 border-t space-y-2 relative">
+            <NavLink to="/" onClick={() => setMobileMenuOpen(false)} className="text-lg font-medium text-green-800 ">
+              Home
+            </NavLink>
+            <NavLink to="/browse-tips" onClick={() => setMobileMenuOpen(false)} className="text-lg font-medium text-green-800">
+              Browse Tips
+            </NavLink>
+            <NavLink to="/explore-gardeners" onClick={() => setMobileMenuOpen(false)} className="text-lg font-medium text-green-800">
+              Explore Gardeners
+            </NavLink>
+            {user && (
+              <>
+                <NavLink to="/sharedtip" onClick={() => setMobileMenuOpen(false)} className="text-lg font-medium text-green-800">
+                  Share Tip
+                </NavLink>
+                <NavLink to="/my-tips" onClick={() => setMobileMenuOpen(false)} className="text-lg font-medium text-green-800">
+                  My Tips
+                </NavLink>
+              </>
+            )}
+            <button
+              onClick={toggleTheme}
+              className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+            >
+              {theme === "light" ? "Dark" : "Light"} Mode
+            </button>
+            {!user ? (
+              <NavLink to="/login" onClick={() => setMobileMenuOpen(false)} className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                Login
+              </NavLink>
+            ) : (
+              <button onClick={handleLogout} className="text-red-600 hover:underline text-sm">
+                Logout
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </nav>
   );
