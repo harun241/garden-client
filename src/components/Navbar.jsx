@@ -159,14 +159,14 @@ const Navbar = ({ toggleTheme, theme }) => {
                 </NavLink>
               </>
             )}
-            <small><button
+            <small className="mb-10"><button
               onClick={toggleTheme}
               className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
             >
               {theme === "light" ? "Dark" : "Light"} Mode
             </button></small>
             {!user ? (
-              <NavLink to="/login" onClick={() => setMobileMenuOpen(false)} className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+              <NavLink to="/login" onClick={() => setMobileMenuOpen(false)} className="bg-green-600 text-white  px-4 py-2 rounded hover:bg-green-700">
                 Login
               </NavLink>
             ) : (

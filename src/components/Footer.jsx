@@ -6,13 +6,21 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-10">
 
 
-        <div className='flex '>
-           <img
-            className="w-10 h-10 rounded-full mr-2"
+        <div>
+           <div className='flex mb-10'>
+            <img
+            className="w-10 h-10 rounded-full mr-2 "
             src="https://i.ibb.co/xKCnLw6C/5532983.webp"
             alt="Logo"
           />
           <p className='text-green-400 font-bold'>Gardening</p>
+           </div>
+          <p className="text-center text-sm text-green-800 dark:text-white leading-relaxed">
+            Gardening is not just a hobby, it’s a way of life. <br />
+            আমাদের লক্ষ্য — প্রতিটি বাড়িতে একটু সবুজ। <br />
+            Join our community, share your tips, inspire others. <br />
+ 
+</p>
          </div>
 
 
