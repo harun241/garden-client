@@ -59,7 +59,7 @@ const Navbar = ({ toggleTheme, theme }) => {
         </button>
 
         {/* Desktop Nav Links */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-6 ">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -86,22 +86,22 @@ const Navbar = ({ toggleTheme, theme }) => {
           </NavLink>
           {user && (
             <>
-              <NavLink
-                to="/sharedtip"
-                className={({ isActive }) =>
-                  `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
-                }
-              >
-                Share Tip
-              </NavLink>
-              <NavLink
-                to="/my-tips"
-                className={({ isActive }) =>
-                  `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
-                }
-              >
-                My Tips
-              </NavLink>
+             <NavLink
+  to="/dashboard/sharedtip"
+  className={({ isActive }) =>
+    `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
+  }
+>
+  Share Tip
+</NavLink>
+<NavLink
+  to="/dashboard/my-tips"
+  className={({ isActive }) =>
+    `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
+  }
+>
+  My Tips
+</NavLink>
                  <NavLink
                 to="/dashboard"
                 className={({ isActive }) =>
@@ -181,19 +181,21 @@ const Navbar = ({ toggleTheme, theme }) => {
             {user && (
               <>
                 <NavLink
-                  to="/sharedtip"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-lg font-medium text-green-800"
-                >
-                  Share Tip
-                </NavLink>
+                to="/dashboard/sharedtip"
+               className={({ isActive }) =>
+               `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
+                  }
+                      >
+              Share Tip
+              </NavLink>
                 <NavLink
-                  to="/my-tips"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-lg font-medium text-green-800"
-                >
-                  My Tips
-                </NavLink>
+                to="/dashboard/my-tips"
+              className={({ isActive }) =>
+               `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
+                 }
+>
+  My Tips
+</NavLink>
                  <NavLink
                   to="/dashboard"
                   onClick={() => setMobileMenuOpen(false)}
