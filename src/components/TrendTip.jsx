@@ -22,7 +22,7 @@ const TrendTip = () => {
   if (loading) return <p className="text-center">Loading trending tips...</p>;
 
   return (
-    <div className="p-4 max-w-7xl mx-auto">
+    <div className="p-4 max-w-7xl mx-auto mt-20">
       <h2 className="text-2xl font-bold mb-4">Top Trending Tips</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {tips.map(tip => (

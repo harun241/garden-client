@@ -24,24 +24,24 @@ const Banner = () => {
 
   const slides = [
     {
-      img: "https://i.ibb.co/kVQBkTbV/Ctd-Mp-L87k-Vinsu5b-AMLshn-1280-80-jpeg.webp",
+      img: "https://i.ibb.co/mV44Mzv2/image.png",
       title: "Grow Together",
       btn: "Join the Community",
     },
     {
-      img: "https://i.ibb.co/J15DBmg/photo-1492496913980-501348b61469.jpg",
+      img: "https://i.ibb.co/bjg7CMjw/image.png",
       title: "Urban Gardening Made Simple",
       btn: "Learn How",
     },
     {
-      img: "https://i.ibb.co/PvpGJTXW/photo-1546580594-a64816022c1b.jpg",
+      img: "https://i.ibb.co/SwD70sTM/image.png",
       title: "Your Green Journey Starts Here",
       btn: "Get Started",
     },
   ];
 
   return (
-    <div className="relative max-w-7xl mx-auto my-10">
+    <div className=" max-w-7xl mx-auto mt-25">
       <Slider {...settings}>
         {slides.map((slide, index) => (
           <div key={index}>
@@ -49,7 +49,7 @@ const Banner = () => {
               className="h-[80vh] bg-cover bg-center flex items-center justify-center text-white text-center px-4"
               style={{ backgroundImage: `url(${slide.img})` }}
             >
-              <div className="bg-black bg-opacity-40 p-8 rounded-md">
+              <div className=" bg-opacity-40 p-8 rounded-md">
                 <h2 className="text-4xl md:text-5xl font-bold mb-4">{slide.title}</h2>
                 <Link
                   to="/explore-gardeners"

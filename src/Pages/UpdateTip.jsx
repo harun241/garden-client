@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const UpdateTipPage = ({ user }) => {
-  const { tipId } = useParams();
+ 
+const { id } = useParams();
+
   const navigate = useNavigate();
 
   const [tipData, setTipData] = useState(null);
@@ -12,7 +16,7 @@ const UpdateTipPage = ({ user }) => {
   const [successMsg, setSuccessMsg] = useState('');
 
   useEffect(() => {
-    fetch(`https://gardening-community.vercel.app/api/garden-tips/${tipId}`)
+     fetch(`https://gardening-community.vercel.app/api/garden-tips/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to load tip data');
         return res.json();
@@ -25,7 +29,7 @@ const UpdateTipPage = ({ user }) => {
         setError(err.message);
         setLoading(false);
       });
-  }, [tipId]);
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -50,7 +54,7 @@ const UpdateTipPage = ({ user }) => {
       isPublic: tipData.isPublic,
     };
 
-    fetch(`https://gardening-community.vercel.app/api/garden-tips/${tipId}`, {
+    fetch(`https://gardening-community.vercel.app/api/garden-tips/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updatedTip),
@@ -60,11 +64,10 @@ const UpdateTipPage = ({ user }) => {
         return res.json();
       })
       .then(() => {
-        setSuccessMsg('Tip updated successfully!');
+         toast.success("Tip Updated successfully!");
         setSubmitLoading(false);
-        setTimeout(() => {
-          navigate('/my-tips');
-        }, 1500);
+       
+        navigate(`/update-tip/${id}`); 
       })
       .catch((err) => {
         setError(err.message);

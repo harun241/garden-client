@@ -26,12 +26,12 @@ const testimonials = [
 
 const Testimonial = () => {
   return (
-    <section className="py-12 px-4 bg-gray-50 dark:bg-gray-900">
+    <section className="py-12 px-4 ">
      
       <LottieAnimation/>
 
       <Fade triggerOnce>
-        <h2 className="text-3xl font-semibold text-gray-800 dark:text-white mb-10 text-center">
+        <h2 className="text-3xl font-semibold  text-green-700 mb-10 text-center mt-20">
           What Our Users Say
         </h2>
       </Fade>

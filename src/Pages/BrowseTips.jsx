@@ -42,7 +42,7 @@ const BrowseTips = () => {
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
+    <div className="p-6 max-w-6xl mx-auto mt-20">
       <h2 className="text-3xl font-bold mb-6 text-center text-green-700">
         🌿 Public Garden Tips
       </h2>

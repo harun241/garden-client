@@ -7,7 +7,7 @@ import Testimonial from '../components/Tesimonials';
 import Navbar from '../components/Navbar';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Fade, Slide, Zoom, Bounce } from "react-awesome-reveal";
+import { Fade } from "react-awesome-reveal";
 
 
 const LayOut = () => {
@@ -33,7 +33,7 @@ const LayOut = () => {
     };
 
     return (
-        <div>
+        <div className='max-w-11/12 mx-auto'>
             
              <Fade>
             <Navbar toggleTheme={toggleTheme} theme={theme} />
