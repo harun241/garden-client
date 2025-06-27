@@ -69,7 +69,11 @@ const Navbar = ({ toggleTheme, theme }) => {
             Home
           </NavLink>
           <NavLink
+<<<<<<< HEAD
             to="/dashboard/browse-tips"
+=======
+            to="/browse-tips"
+>>>>>>> 1572dfb00fdf753f9cd359b59d35ebe4bdd06b93
             className={({ isActive }) =>
               `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
             }

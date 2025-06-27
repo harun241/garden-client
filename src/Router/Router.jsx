@@ -17,7 +17,10 @@ import DashBoardOverView from "../Pages/Dashboard/DashBoardOverView";
 import AllItems from "../Pages/Dashboard/AllItems";
 import AddItem from "../Pages/Dashboard/AddItems";
 import MyItems from "../Pages/Dashboard/MyItems";
+<<<<<<< HEAD
 import UpdateTipPage from "../pages/UpdateTip";
+=======
+>>>>>>> 1572dfb00fdf753f9cd359b59d35ebe4bdd06b93
 
 export const router = createBrowserRouter([
   {
@@ -30,7 +33,11 @@ export const router = createBrowserRouter([
       { path: "register", element: <Register /> },
       
       { path: "explore-gardeners", element: <ExploreGardeners /> },
+<<<<<<< HEAD
 
+=======
+      { path: "browse-tips", element: <BrowseTips /> },
+>>>>>>> 1572dfb00fdf753f9cd359b59d35ebe4bdd06b93
      
       {
         path: "tip/:id",
@@ -40,6 +47,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+<<<<<<< HEAD
       { 
   path: "update-tip/:id", 
   element: (
@@ -48,6 +56,8 @@ export const router = createBrowserRouter([
     </PrivateRoute>
   ) 
 },
+=======
+>>>>>>> 1572dfb00fdf753f9cd359b59d35ebe4bdd06b93
      
       {
         path: "dashboard",
@@ -61,7 +71,10 @@ export const router = createBrowserRouter([
           { path: "all-items", element: <AllItems /> },
           { path: "add-item", element: <AddItem /> },
           { path: "my-items", element: <MyItems /> },
+<<<<<<< HEAD
            { path: "browse-tips", element: <BrowseTips /> },
+=======
+>>>>>>> 1572dfb00fdf753f9cd359b59d35ebe4bdd06b93
            {
         path: "my-tips",
         element: (

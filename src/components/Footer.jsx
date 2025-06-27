@@ -32,17 +32,25 @@ const Footer = () => {
           <p className='text-green-400 font-bold'>Gardening</p>
            </div>
             
+<<<<<<< HEAD
          <div>
  <h4 className="text-lg font-semibold border-b-2 border-green-500 ">Our-Goal</h4>
            <p className="text-center text-sm text-green-800 dark:text-white leading-relaxed mt-32">
            
+=======
+          <p className="text-center text-sm text-green-800 dark:text-white leading-relaxed mt-32">
+            <h4 className="text-lg font-semibold border-b-2 border-green-500 ">Our-Goal</h4>
+>>>>>>> 1572dfb00fdf753f9cd359b59d35ebe4bdd06b93
             Gardening is not just a hobby, it’s a way of life. <br />
             আমাদের লক্ষ্য — প্রতিটি বাড়িতে একটু সবুজ। <br />
             Join our community, share your tips, inspire others. <br />
  
 </p>
          </div>
+<<<<<<< HEAD
          </div>
+=======
+>>>>>>> 1572dfb00fdf753f9cd359b59d35ebe4bdd06b93
 
 
        
