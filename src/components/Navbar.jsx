@@ -69,11 +69,7 @@ const Navbar = ({ toggleTheme, theme }) => {
             Home
           </NavLink>
           <NavLink
-<<<<<<< HEAD
-            to="/dashboard/browse-tips"
-=======
             to="/browse-tips"
->>>>>>> 1572dfb00fdf753f9cd359b59d35ebe4bdd06b93
             className={({ isActive }) =>
               `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
             }
@@ -90,23 +86,23 @@ const Navbar = ({ toggleTheme, theme }) => {
           </NavLink>
           {user && (
             <>
-             <NavLink
-  to="/dashboard/sharedtip"
-  className={({ isActive }) =>
-    `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
-  }
->
-  Share Tip
-</NavLink>
-<NavLink
-  to="/dashboard/my-tips"
-  className={({ isActive }) =>
-    `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
-  }
->
-  My Tips
-</NavLink>
-                 <NavLink
+              <NavLink
+                to="/dashboard/sharedtip"
+                className={({ isActive }) =>
+                  `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
+                }
+              >
+                Share Tip
+              </NavLink>
+              <NavLink
+                to="/dashboard/my-tips"
+                className={({ isActive }) =>
+                  `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
+                }
+              >
+                My Tips
+              </NavLink>
+              <NavLink
                 to="/dashboard"
                 className={({ isActive }) =>
                   `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
@@ -185,32 +181,29 @@ const Navbar = ({ toggleTheme, theme }) => {
             {user && (
               <>
                 <NavLink
-                to="/dashboard/sharedtip"
-               className={({ isActive }) =>
-               `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
+                  to="/dashboard/sharedtip"
+                  className={({ isActive }) =>
+                    `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
                   }
-                      >
-              Share Tip
-              </NavLink>
+                >
+                  Share Tip
+                </NavLink>
                 <NavLink
-                to="/dashboard/my-tips"
-              className={({ isActive }) =>
-               `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
-                 }
->
-  My Tips
-</NavLink>
-                 <NavLink
+                  to="/dashboard/my-tips"
+                  className={({ isActive }) =>
+                    `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
+                  }
+                >
+                  My Tips
+                </NavLink>
+                <NavLink
                   to="/dashboard"
                   onClick={() => setMobileMenuOpen(false)}
                   className="text-lg font-medium text-green-800"
                 >
-                 DashBoard
+                  DashBoard
                 </NavLink>
-
-                  
               </>
-              
             )}
             <small className="mb-10">
               <button
