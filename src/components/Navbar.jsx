@@ -166,108 +166,107 @@ const Navbar = ({ toggleTheme, theme }) => {
         </ul>
 
         {/* Mobile Menu */}
-       {/* Mobile Menu */}
-{mobileMenuOpen && (
-  <div className="absolute top-16 mb-30 left-4 w-48 bg-base-100 shadow-md z-50 lg:hidden rounded-md">
-    <ul className="flex flex-col p-2 space-y-2 text-left">
-      <li>
-        <NavLink
-          to="/"
-          onClick={() => setMobileMenuOpen(false)}
-          className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}
-        >
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/browse-tips"
-          onClick={() => setMobileMenuOpen(false)}
-          className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}
-        >
-          Browse Tips
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/explore-gardeners"
-          onClick={() => setMobileMenuOpen(false)}
-          className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}
-        >
-          Explore Gardeners
-        </NavLink>
-      </li>
-      {user && (
-        <>
-          <li>
-            <NavLink
-              to="/dashboard/sharedtip"
-              onClick={() => setMobileMenuOpen(false)}
-              className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}
-            >
-              Share Tip
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/my-tips"
-              onClick={() => setMobileMenuOpen(false)}
-              className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}
-            >
-              My Tips
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-green-800 font-medium"
-            >
-              Dashboard
-            </NavLink>
-          </li>
-        </>
-      )}
+        {mobileMenuOpen && (
+          <div className="absolute top-16 left-0 w-full bg-base-100 shadow-md z-50 lg:hidden">
+            <ul className="flex flex-col p-4 space-y-3">
+              <li>
+                <NavLink
+                  to="/"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/browse-tips"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}
+                >
+                  Browse Tips
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/explore-gardeners"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}
+                >
+                  Explore Gardeners
+                </NavLink>
+              </li>
+              {user && (
+                <>
+                  <li>
+                    <NavLink
+                      to="/dashboard/sharedtip"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}
+                    >
+                      Share Tip
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/dashboard/my-tips"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}
+                    >
+                      My Tips
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/dashboard"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-green-800 font-medium"
+                    >
+                      Dashboard
+                    </NavLink>
+                  </li>
+                </>
+              )}
 
-      <li>
-        <button
-          onClick={() => {
-            toggleTheme();
-            setMobileMenuOpen(false);
-          }}
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 text-sm w-full"
-        >
-          {theme === "light" ? "Dark" : "Light"} Mode
-        </button>
-      </li>
+              <li>
+                <button
+                  onClick={() => {
+                    toggleTheme();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 text-sm w-full"
+                >
+                  {theme === "light" ? "Dark" : "Light"} Mode
+                </button>
+              </li>
 
-      {user ? (
-        <li>
-          <button
-            onClick={() => {
-              handleLogout();
-              setMobileMenuOpen(false);
-              setShowLogout(false);
-            }}
-            className="text-red-600 hover:underline text-sm w-full text-left"
-          >
-            Logout
-          </button>
-        </li>
-      ) : (
-        <li>
-          <NavLink
-            to="/login"
-            onClick={() => setMobileMenuOpen(false)}
-            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 text-sm w-full text-center block"
-          >
-            Login
-          </NavLink>
-        </li>
-      )}
-    </ul>
-  </div>
-)}
+              {user ? (
+                <li>
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setMobileMenuOpen(false);
+                      setShowLogout(false);
+                    }}
+                    className="text-red-600 hover:underline text-sm w-full text-left"
+                  >
+                    Logout
+                  </button>
+                </li>
+              ) : (
+                <li>
+                  <NavLink
+                    to="/login"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 text-sm w-full text-center block"
+                  >
+                    Login
+                  </NavLink>
+                </li>
+              )}
+            </ul>
+          </div>
+        )}
       </nav>
 
       {/* To prevent content going under fixed navbar */}
@@ -276,4 +275,4 @@ const Navbar = ({ toggleTheme, theme }) => {
   );
 };
 
-export default Navbar;
+export default Navbar; 
