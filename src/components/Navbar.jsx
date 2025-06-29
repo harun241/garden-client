@@ -1,235 +1,277 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { useAuth } from "./Authcontext";
 import { signOut } from "firebase/auth";
 import auth from "../Firebase.config";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../components/Authcontext";
 
 const Navbar = ({ toggleTheme, theme }) => {
   const { user } = useAuth();
-  const [showLogout, setShowLogout] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const navigate = useNavigate();
+  const [showLogout, setShowLogout] = useState(false);
+  const containerRef = useRef(null);
+
+  const activeClassName = "border-b-2 border-green-700 text-green-900";
+  const inactiveClassName = "text-green-800 hover:border-b-2 hover:border-green-500";
 
   const handleLogout = () => {
     signOut(auth).then(() => {
       setShowLogout(false);
       setMobileMenuOpen(false);
-      navigate("/");
+
     });
   };
 
-  const activeClassName = "border-b-2 border-green-700 text-green-900";
-  const inactiveClassName = "text-green-800 hover:border-b-2 hover:border-green-500";
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        setShowLogout(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
-    <nav className="bg-green-100 shadow-md top-0 left-0 right-0">
-      <div className="w-11/12 mx-auto flex justify-between items-center h-20 relative">
-        {/* Logo */}
-        <Link
-          to="/"
-          className="text-2xl font-bold text-green-800 dark:text-green-400 flex items-center"
-        >
-          <img
-            className="w-10 h-10 rounded-full mr-2"
-            src="https://i.ibb.co/xKCnLw6C/5532983.webp"
-            alt="Logo"
-          />
-          Gardening
-        </Link>
-
-        {/* Mobile Toggle */}
-        <button
-          className="md:hidden z-50"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle Menu"
-        >
-          <svg
-            className="w-6 h-6 text-green-800"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            viewBox="0 0 24 24"
+    <>
+      <nav className="fixed top-0 left-0 w-full bg-base-100 shadow z-50 h-16 flex items-center px-4 justify-between">
+        <div className="flex items-center space-x-4">
+          <button
+            className="lg:hidden p-1"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
             ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
             )}
-          </svg>
-        </button>
-
-        {/* Desktop Nav Links */}
-        <div className="hidden md:flex items-center gap-6 ">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
-            }
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/browse-tips"
-            className={({ isActive }) =>
-              `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
-            }
-          >
-            Browse Tips
-          </NavLink>
-          <NavLink
-            to="/explore-gardeners"
-            className={({ isActive }) =>
-              `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
-            }
-          >
-            Explore Gardeners
-          </NavLink>
-          {user && (
-            <>
-              <NavLink
-                to="/dashboard/sharedtip"
-                className={({ isActive }) =>
-                  `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
-                }
-              >
-                Share Tip
-              </NavLink>
-              <NavLink
-                to="/dashboard/my-tips"
-                className={({ isActive }) =>
-                  `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
-                }
-              >
-                My Tips
-              </NavLink>
-              <NavLink
-                to="/dashboard"
-                className={({ isActive }) =>
-                  `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
-                }
-              >
-                Dashboard
-              </NavLink>
-            </>
-          )}
-        </div>
-
-        {/* Right Side: Theme + Auth */}
-        <div className="hidden md:flex items-center gap-4">
-          <button
-            onClick={toggleTheme}
-            className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 text-sm"
-          >
-            {theme === "light" ? "Dark" : "Light"}
           </button>
 
-          {!user ? (
-            <NavLink
-              to="/login"
+          <Link to="/" className="flex items-center" onClick={() => setMobileMenuOpen(false)}>
+            <img
+              className="w-10 h-10 rounded-full mr-2"
+              src="https://i.ibb.co/xKCnLw6C/5532983.webp"
+              alt="Logo"
+            />
+            <span className="text-2xl font-bold text-green-800 dark:text-green-400">Gardening</span>
+          </Link>
+        </div>
+
+        {/* Desktop Menu */}
+        <ul className="hidden lg:flex space-x-6 items-center">
+          <li>
+            <NavLink to="/" className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}>
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/browse-tips" className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}>
+              Browse Tips
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/explore-gardeners" className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}>
+              Explore Gardeners
+            </NavLink>
+          </li>
+          {user && (
+            <>
+              <li>
+                <NavLink to="/dashboard/sharedtip" className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}>
+                  Share Tip
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/my-tips" className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}>
+                  My Tips
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard" className="text-green-800 font-medium">
+                  Dashboard
+                </NavLink>
+              </li>
+            </>
+          )}
+
+          {/* Theme toggle */}
+          <li>
+            <button
+              onClick={toggleTheme}
               className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 text-sm"
             >
-              Login
-            </NavLink>
-          ) : (
-            <div
-              className="relative group inline-block cursor-pointer"
-              onClick={() => setShowLogout(!showLogout)}
-            >
-              <img
-                src={user.photoURL || "https://i.ibb.co/FKkzmYy/default-user.png"}
-                alt="User"
-                className="w-10 h-10 rounded-full border border-green-400"
-              />
-              <span className="absolute text-xs bg-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 dark:bg-white left-1 transform -translate-x-1/2 whitespace-nowrap">
-                {user.displayName || user.email}
-              </span>
+              {theme === "light" ? "Dark" : "Light"} Mode
+            </button>
+          </li>
+
+          {/* Login/Logout & Profile */}
+          {user ? (
+            <li ref={containerRef} className="relative">
+              <div
+                className="flex items-center cursor-pointer select-none"
+                onClick={() => setShowLogout((prev) => !prev)}
+              >
+                <img
+                  src={user.photoURL || "https://i.ibb.co/FKkzmYy/default-user.png"}
+                  alt="User"
+                  className="w-10 h-10 rounded-full border border-green-400"
+                />
+                <span className="ml-2 text-green-800 dark:text-green-400 hidden md:inline-block whitespace-nowrap">
+                  {user.displayName || user.email}
+                </span>
+              </div>
+
               {showLogout && (
-                <div className="absolute right-0 mt-2 bg-white border rounded shadow p-2 z-50">
-                  <button onClick={handleLogout} className="text-red-600 hover:underline text-sm">
+                <div className="absolute right-0 mt-2 w-max bg-white border rounded shadow-lg p-2 z-50 dark:bg-gray-800 dark:text-white">
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setShowLogout(false);
+                      setMobileMenuOpen(false);
+                    }}
+                    className="text-red-600 hover:underline text-sm w-full text-left"
+                  >
                     Logout
                   </button>
                 </div>
               )}
-            </div>
-          )}
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden md:hidden bg-green-100 z-50 px-4 mt-24 border-t space-y-2 relative">
-            <NavLink
-              to="/"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-lg font-medium text-green-800 "
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to="/browse-tips"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-lg font-medium text-green-800"
-            >
-              Browse Tips
-            </NavLink>
-            <NavLink
-              to="/explore-gardeners"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-lg font-medium text-green-800"
-            >
-              Explore Gardeners
-            </NavLink>
-            {user && (
-              <>
-                <NavLink
-                  to="/dashboard/sharedtip"
-                  className={({ isActive }) =>
-                    `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
-                  }
-                >
-                  Share Tip
-                </NavLink>
-                <NavLink
-                  to="/dashboard/my-tips"
-                  className={({ isActive }) =>
-                    `px-3 py-2 font-medium ${isActive ? activeClassName : inactiveClassName}`
-                  }
-                >
-                  My Tips
-                </NavLink>
-                <NavLink
-                  to="/dashboard"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-lg font-medium text-green-800"
-                >
-                  DashBoard
-                </NavLink>
-              </>
-            )}
-            <small className="mb-10">
-              <button
-                onClick={toggleTheme}
-                className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-              >
-                {theme === "light" ? "Dark" : "Light"} Mode
-              </button>
-            </small>
-            {!user ? (
+            </li>
+          ) : (
+            <li>
               <NavLink
                 to="/login"
                 onClick={() => setMobileMenuOpen(false)}
-                className="bg-green-600 text-white  px-4 py-2 rounded hover:bg-green-700"
+                className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 text-sm"
               >
                 Login
               </NavLink>
-            ) : (
-              <button onClick={handleLogout} className="text-red-600 hover:underline text-sm">
-                Logout
-              </button>
-            )}
+            </li>
+          )}
+        </ul>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="absolute top-16 left-0 w-full bg-base-100 shadow-md z-50 lg:hidden">
+            <ul className="flex flex-col p-4 space-y-3">
+              <li>
+                <NavLink
+                  to="/"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/browse-tips"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}
+                >
+                  Browse Tips
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/explore-gardeners"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}
+                >
+                  Explore Gardeners
+                </NavLink>
+              </li>
+              {user && (
+                <>
+                  <li>
+                    <NavLink
+                      to="/dashboard/sharedtip"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}
+                    >
+                      Share Tip
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/dashboard/my-tips"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}
+                    >
+                      My Tips
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/dashboard"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-green-800 font-medium"
+                    >
+                      Dashboard
+                    </NavLink>
+                  </li>
+                </>
+              )}
+
+              <li>
+                <button
+                  onClick={() => {
+                    toggleTheme();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 text-sm w-full"
+                >
+                  {theme === "light" ? "Dark" : "Light"} Mode
+                </button>
+              </li>
+
+              {user ? (
+                <li>
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setMobileMenuOpen(false);
+                      setShowLogout(false);
+                    }}
+                    className="text-red-600 hover:underline text-sm w-full text-left"
+                  >
+                    Logout
+                  </button>
+                </li>
+              ) : (
+                <li>
+                  <NavLink
+                    to="/login"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 text-sm w-full text-center block"
+                  >
+                    Login
+                  </NavLink>
+                </li>
+              )}
+            </ul>
           </div>
         )}
-      </div>
-    </nav>
+      </nav>
+
+      {/* To prevent content going under fixed navbar */}
+      <div className="pt-16" />
+    </>
   );
 };
 
