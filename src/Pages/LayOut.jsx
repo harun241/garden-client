@@ -7,7 +7,6 @@ import Testimonial from '../components/Tesimonials';
 import Navbar from '../components/Navbar';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Fade } from "react-awesome-reveal";
 
 
 const LayOut = () => {
@@ -33,20 +32,15 @@ const LayOut = () => {
     };
 
     return (
-        <div className='max-w-11/12 mx-auto'>
-            
-             <Fade>
+        <div className='relative'>
             <Navbar toggleTheme={toggleTheme} theme={theme} />
+            
 
             <Outlet />
 
             {!hideTestimonial && <Testimonial />}
             {!hideFooter && <Footer />}
 
-
-
-      
-    </Fade>
 
             <ToastContainer 
                 position="top-right"

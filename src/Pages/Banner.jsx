@@ -7,12 +7,17 @@ import bannerImg3 from "../assets/banner3.jpg";
 
 const Banner = () => {
   return (
-    <Carousel AutoPlay infiniteLoop showThumbs={false}>
+    <Carousel
+      className=" mx-auto z-0 mt-10 h-[70vh]"
+      autoPlay
+      infiniteLoop
+      showThumbs={false}
+    >
       <div>
         <img
           src={bannerImg1}
           alt="Banner 1"
-          className="h-96 w-full object-cover"
+          className="h-[70vh] w-full object-cover"
         />
         <p className="legend">Gardening community</p>
       </div>
@@ -20,7 +25,7 @@ const Banner = () => {
         <img
           src={bannerImg2}
           alt="Banner 2"
-          className="h-96 w-full object-cover"
+          className="h-[70vh] w-full object-cover"
         />
         <p className="legend">Join To explore</p>
       </div>
@@ -28,7 +33,7 @@ const Banner = () => {
         <img
           src={bannerImg3}
           alt="Banner 3"
-          className="h-88 w-full object-cover"
+          className="h-[70vh] w-full object-cover"
         />
         <p className="legend">Learn about gardening</p>
       </div>

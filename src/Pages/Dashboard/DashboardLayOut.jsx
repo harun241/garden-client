@@ -8,7 +8,7 @@ const DashboardLayout = () => {
   const activeClass = "font-semibold text-green-900";
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
+    <div className="min-h-screen flex flex-col mt-20 md:flex-row">
       {/* Sidebar overlay for mobile */}
       {sidebarOpen && (
         <div

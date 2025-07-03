@@ -5,12 +5,12 @@ import TrendTip from '../components/TrendTip';
 
 
 
+
 const Home = () => {
     
     return (
-        <div>
+        <div className='relative z-0'> 
                
-             
           <Banner></Banner>
           <FeaturedGardeners></FeaturedGardeners>
           <TrendTip></TrendTip>
