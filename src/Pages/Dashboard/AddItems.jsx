@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// API_BASE_URL নিচে ডিফাইন করো, অথবা import করো .env থেকে
 const API_BASE_URL = import.meta.env.API_BASE_URL;
 
 const AddItem = () => {

@@ -7,37 +7,41 @@ import bannerImg3 from "../assets/banner3.jpg";
 
 const Banner = () => {
   return (
-    <Carousel
-      className=" mx-auto z-0 mt-10 h-[70vh]"
-      autoPlay
-      infiniteLoop
-      showThumbs={false}
-    >
-      <div>
-        <img
-          src={bannerImg1}
-          alt="Banner 1"
-          className="h-[70vh] w-full object-cover"
-        />
-        <p className="legend">Gardening community</p>
-      </div>
-      <div>
-        <img
-          src={bannerImg2}
-          alt="Banner 2"
-          className="h-[70vh] w-full object-cover"
-        />
-        <p className="legend">Join To explore</p>
-      </div>
-      <div>
-        <img
-          src={bannerImg3}
-          alt="Banner 3"
-          className="h-[70vh] w-full object-cover"
-        />
-        <p className="legend">Learn about gardening</p>
-      </div>
-    </Carousel>
+    <div className="max-w-7xl mx-auto mt-10 rounded-2xl overflow-hidden shadow-lg">
+      <Carousel
+        autoPlay
+        infiniteLoop
+        showThumbs={false}
+        showStatus={false}
+        interval={3000}
+        className="rounded-2xl"
+      >
+        <div>
+          <img
+            src={bannerImg1}
+            alt="Banner 1"
+            className="h-[70vh] w-full object-cover"
+          />
+          <p className="legend">Gardening community</p>
+        </div>
+        <div>
+          <img
+            src={bannerImg2}
+            alt="Banner 2"
+            className="h-[70vh] w-full object-cover"
+          />
+          <p className="legend">Join To Explore</p>
+        </div>
+        <div>
+          <img
+            src={bannerImg3}
+            alt="Banner 3"
+            className="h-[70vh] w-full object-cover"
+          />
+          <p className="legend">Learn About Gardening</p>
+        </div>
+      </Carousel>
+    </div>
   );
 };
 

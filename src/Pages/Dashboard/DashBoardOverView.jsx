@@ -12,15 +12,15 @@ const DashBoardOverView = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="p-4 bg-white rounded shadow">
           <h3 className="text-xl font-semibold text-green-700">Total Items</h3>
-          <p className="text-3xl text-blue-600 ">{totalItems}</p>
+          <p className="text-3xl text-blue-400 ">{totalItems}</p>
         </div>
         <div className="p-4 bg-white rounded shadow">
           <h3 className="text-xl font-semibold text-green-700">My Items</h3>
-          <p className="text-3xl text-blue-600">{myItems}</p>
+          <p className="text-3xl text-blue-400">{myItems}</p>
         </div>
         <div className="p-4 bg-white rounded shadow ">
           <h3 className="text-xl font-semibold text-green-700">User Email</h3>
-          <p className="text-md text-blue-600">{user?.email}</p>
+          <p className="text-md text-blue-400">{user?.email}</p>
         </div>
       </div>
     </div>

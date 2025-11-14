@@ -31,7 +31,7 @@ const Testimonial = () => {
       <LottieAnimation/>
 
       <Fade triggerOnce>
-        <h2 className="text-3xl font-semibold  text-green-700 mb-10 text-center mt-20">
+        <h2 className="text-3xl font-semibold  text-green-500 mb-10 text-center mt-20">
           What Our Users Say
         </h2>
       </Fade>
@@ -39,13 +39,13 @@ const Testimonial = () => {
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {testimonials.map(({ id, name, feedback, photo }) => (
           <Zoom triggerOnce key={id}>
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md flex flex-col items-center text-center transition-all">
+            <div className="bg-transparent dark:bg-gray-800 p-6 rounded-lg shadow-md flex flex-col items-center text-center transition-all">
               <img
                 src={photo}
                 alt={name}
                 className="w-16 h-16 rounded-full object-cover mb-4"
               />
-              <p className="italic text-gray-700 dark:text-gray-300 mb-3">
+              <p className="italic dark:text-white mb-3">
                 "{feedback}"
               </p>
               <p className="font-semibold text-green-600 dark:text-green-400">

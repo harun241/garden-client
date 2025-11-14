@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
+
 const ShareGardenTip = ({ user }) => {
   if (!user) {
     return (
@@ -37,11 +38,14 @@ const ShareGardenTip = ({ user }) => {
     };
 
     try {
-      const response = await fetch("https://gardening-community.vercel.app/api/garden-tips", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const response = await fetch(
+        "https://gardening-community.vercel.app/api/garden-tips",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
 
       if (response.ok) {
         toast.success("Tip submitted successfully!");
@@ -55,22 +59,24 @@ const ShareGardenTip = ({ user }) => {
           availability: "Public",
         });
       } else {
-        alert("Failed to submit tip.");
+        toast.error("Failed to submit tip.");
       }
     } catch (error) {
-      //console.error("Error submitting tip:", error);
-      alert("An error occurred.");
+      toast.error("An error occurred.");
     }
   };
 
   return (
-    <div className="max-w-xl w-[90%] mx-auto mt-8 p-6 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 shadow-md">
-      <h2 className="text-xl font-semibold text-center text-green-700 dark:text-green-400 mb-6">
+    <div className="max-w-xl w-full mx-auto mt-10 p-6 border border-gray-300 dark:border-gray-600 rounded-3xl
+      bg-white dark:bg-gray-900 shadow-lg transition-all duration-300">
+      <h2 className="text-2xl sm:text-3xl font-bold text-center text-green-600 dark:text-green-400 mb-8">
         ➕ Share a Garden Tip
       </h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+
+      <form onSubmit={handleSubmit} className="space-y-5">
+        {/* Title */}
         <div>
-          <label className="font-bold text-gray-700 dark:text-gray-300 block mb-1">Title:</label>
+          <label className="font-medium text-gray-700 dark:text-gray-300 block mb-1">Title</label>
           <input
             type="text"
             name="title"
@@ -78,12 +84,13 @@ const ShareGardenTip = ({ user }) => {
             onChange={handleChange}
             placeholder="How I Grow Tomatoes Indoors"
             required
-            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition"
           />
         </div>
 
+        {/* Plant Type */}
         <div>
-          <label className="font-bold text-gray-700 dark:text-gray-300 block mb-1">Plant Type/Topic:</label>
+          <label className="font-medium text-gray-700 dark:text-gray-300 block mb-1">Plant Type / Topic</label>
           <input
             type="text"
             name="plantType"
@@ -91,103 +98,109 @@ const ShareGardenTip = ({ user }) => {
             onChange={handleChange}
             placeholder="Tomato, Herbs, etc."
             required
-            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition"
           />
         </div>
 
-        <div>
-          <label className="font-bold text-gray-700 dark:text-gray-300 block mb-1">Difficulty Level:</label>
-          <select
-            name="difficultyLevel"
-            value={formData.difficultyLevel}
-            onChange={handleChange}
-            required
-            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-          >
-            <option value="Easy">Easy</option>
-            <option value="Medium">Medium</option>
-            <option value="Hard">Hard</option>
-          </select>
+        {/* Difficulty & Category */}
+        <div className="flex gap-4">
+          <div className="flex-1">
+            <label className="font-medium text-gray-700 dark:text-gray-300 block mb-1">Difficulty Level</label>
+            <select
+              name="difficultyLevel"
+              value={formData.difficultyLevel}
+              onChange={handleChange}
+              className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+            >
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
+            </select>
+          </div>
+
+          <div className="flex-1">
+            <label className="font-medium text-gray-700 dark:text-gray-300 block mb-1">Category</label>
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+            >
+              <option value="Composting">Composting</option>
+              <option value="Plant Care">Plant Care</option>
+              <option value="Vertical Gardening">Vertical Gardening</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
         </div>
 
+        {/* Description */}
         <div>
-          <label className="font-bold text-gray-700 dark:text-gray-300 block ">Description:</label>
+          <label className="font-medium text-gray-700 dark:text-gray-300 block mb-1">Description</label>
           <textarea
             name="description"
             value={formData.description}
             onChange={handleChange}
             placeholder="Write your detailed garden tip here..."
-            rows={3}
+            rows={4}
             required
-            className="w-full  border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-vertical"
+            className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-vertical focus:outline-none focus:ring-2 focus:ring-green-500 transition"
           />
         </div>
 
+        {/* Images URL */}
         <div>
-          <label className="font-bold text-gray-700 dark:text-gray-300 block mb-1">Images URL:</label>
+          <label className="font-medium text-gray-700 dark:text-gray-300 block mb-1">Images URL</label>
           <input
             type="url"
             name="imagesUrl"
             value={formData.imagesUrl}
             onChange={handleChange}
-            placeholder="img url"
-            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            placeholder="https://example.com/image.jpg"
+            className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition"
           />
         </div>
 
+        {/* Availability */}
         <div>
-          <label className="font-bold text-gray-700 dark:text-gray-300 block mb-1">Category:</label>
-          <select
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            required
-            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-          >
-            <option value="Composting">Composting</option>
-            <option value="Plant Care">Plant Care</option>
-            <option value="Vertical Gardening">Vertical Gardening</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="font-bold text-gray-700 dark:text-gray-300 block mb-1">Availability:</label>
+          <label className="font-medium text-gray-700 dark:text-gray-300 block mb-1">Availability</label>
           <select
             name="availability"
             value={formData.availability}
             onChange={handleChange}
-            required
-            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition"
           >
             <option value="Public">Public</option>
             <option value="Hidden">Hidden</option>
           </select>
         </div>
 
-        <div>
-          <label className="font-bold text-gray-700 dark:text-gray-300 block mb-1">User Email:</label>
-          <input
-            type="email"
-            value={user?.email || ""}
-            readOnly
-            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white"
-          />
+        {/* User Info */}
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="font-medium text-gray-700 dark:text-gray-300 block mb-1">User Email</label>
+            <input
+              type="email"
+              value={user?.email || ""}
+              readOnly
+              className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white"
+            />
+          </div>
+          <div>
+            <label className="font-medium text-gray-700 dark:text-gray-300 block mb-1">User Name</label>
+            <input
+              type="text"
+              value={user?.displayName || ""}
+              readOnly
+              className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white"
+            />
+          </div>
         </div>
 
-        <div>
-          <label className="font-bold text-gray-700 dark:text-gray-300 block mb-1">User Name:</label>
-          <input
-            type="text"
-            value={user?.displayName || ""}
-            readOnly
-            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-          />
-        </div>
-
+        {/* Submit Button */}
         <button
           type="submit"
-          className="w-full p-3 mt-4 bg-green-600 hover:bg-green-700 text-white font-bold rounded"
+          className="w-full py-3 mt-5 bg-green-600 hover:bg-green-700 text-white font-bold rounded-2xl shadow-md transition-all duration-300 transform hover:scale-[1.02]"
         >
           Submit Tip
         </button>

@@ -33,7 +33,7 @@ const Navbar = ({ toggleTheme, theme }) => {
   return (
     <>
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 w-full bg-white dark:bg-gray-900 shadow-md z-[9999] h-16 flex items-center justify-between px-4">
+      <nav className="fixed top-0 left-0 w-full  bg-white shadow-md z-[9999] h-16 flex items-center justify-between px-4">
         {/* Left: Hamburger + Logo */}
         <div className="flex items-center space-x-4">
           <button

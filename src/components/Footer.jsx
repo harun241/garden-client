@@ -25,7 +25,7 @@ const Footer = () => {
           </div>
 
           <h4 className="text-lg font-semibold border-b-2 border-green-500 pb-2 mb-3">Our Goal</h4>
-          <p className="text-sm text-green-200 leading-relaxed mt-2">
+          <p className="text-sm text-gray-400 leading-relaxed mt-2">
             Gardening is not just a hobby, it’s a way of life. <br />
             আমাদের লক্ষ্য — প্রতিটি বাড়িতে একটু সবুজ। <br />
             Join our community, share your tips, inspire others.
@@ -40,7 +40,7 @@ const Footer = () => {
               href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white text-sm hover:underline flex items-center gap-2"
+              className="text-gray-400 text-sm hover:underline flex items-center gap-2"
             >
               <FaFacebookSquare /> Facebook
             </a>
@@ -48,7 +48,7 @@ const Footer = () => {
               href="https://twitter.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white text-sm hover:underline flex items-center gap-2"
+              className="text-gray-400 text-sm hover:underline flex items-center gap-2"
             >
               <FaTwitter /> Twitter
             </a>
@@ -56,7 +56,7 @@ const Footer = () => {
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white text-sm hover:underline flex items-center gap-2"
+              className="text-gray-400 text-sm hover:underline flex items-center gap-2"
             >
               <FaLinkedin /> LinkedIn
             </a>
